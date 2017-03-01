@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Game15</string>
+    <string name="steps10">10 steps</string>
+    <string name="steps30">30 steps</string>
+    <string name="steps50">50 steps</string>
+    <string name="shuffle">Shuffle</string>
+</resources>
