@@ -44,19 +44,19 @@
                 <RadioButton
                     android:id="@+id/button10"
                     style="@style/radiobuttons"
-                    android:tag="10"
+                    android:tag="100"
                     android:text="@string/steps10" />
 
                 <RadioButton
                     android:id="@+id/button30"
                     style="@style/radiobuttons"
-                    android:tag="30"
+                    android:tag="300"
                     android:text="@string/steps30" />
 
                 <RadioButton
                     android:id="@+id/button50"
                     style="@style/radiobuttons"
-                    android:tag="50"
+                    android:tag="500"
                     android:text="@string/steps50" />
 
             </RadioGroup>
@@ -73,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
+                android:tag="700"
                 android:text="@string/shuffle" />
         </LinearLayout>
 

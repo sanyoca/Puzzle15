@@ -22,38 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
         gameTable = new board();
 
-        findViewById(R.id.button10).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mStepsToFlush = 10;
-            }
-        });
-
-        findViewById(R.id.button30).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mStepsToFlush = 30;
-            }
-        });
-
-        findViewById(R.id.button50).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mStepsToFlush = 50;
-            }
-        });
-
-        findViewById(R.id.shufflebutton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // reset the table
-                gameTable.resetTable();
-                // shuffle the tiles
-                gameTable.shuffleTable(mStepsToFlush);
-                // show the table
-                showTable();
-            }
-        });
+        findViewById(R.id.button10).setOnClickListener(gameTable);
+        findViewById(R.id.button30).setOnClickListener(gameTable);
+        findViewById(R.id.button50).setOnClickListener(gameTable);
+        findViewById(R.id.shufflebutton).setOnClickListener(gameTable);
 
         showTable();
     }
@@ -143,56 +115,89 @@ public class MainActivity extends AppCompatActivity {
         // the clicklistener that listens to the clicks, happen to tiles
         //
 
-        @Override
         public void onClick(View v) {
             int row = 1, col = 1;
             boolean gotCha = false;
             int tileNumber;
+            int pushedView = Integer.valueOf(v.getTag().toString());
 
-            // the tag of the tile clicked on
-            String clickedTile = (String) v.getTag();
-            if (clickedTile.equals(" ")) {
-                tileNumber = 0;
-            } else {
-                tileNumber = Integer.valueOf(clickedTile);
-            }
-
-            // where is the clicked tile in the matrix?
-            while (row < 5 && !gotCha) {
-                while (col < 5 && !gotCha) {
-                    if (getBoardValue(col, row) == tileNumber) {
-                        gotCha = true;
-                    }
-                    col++;
+            if(pushedView <= 16) {
+                // the tag of the tile clicked on
+                String clickedTile = (String) v.getTag();
+                if (clickedTile.equals(" ")) {
+                    tileNumber = 0;
+                } else {
+                    tileNumber = pushedView;
                 }
-                row++;
-                if (!gotCha) col = 1;
+
+                // where is the clicked tile in the matrix?
+                while (row < 5 && !gotCha) {
+                    while (col < 5 && !gotCha) {
+                        if (getBoardValue(col, row) == tileNumber) {
+                            gotCha = true;
+                        }
+                        col++;
+                    }
+                    row++;
+                    if (!gotCha) col = 1;
+                }
+
+                col--;
+                row--;
+
+                // col, row position shows to the clicked tile's position
+                // now, if possible, swap the tile with the empty spot
+
+                if (row == mEmptySpotRow && col == mEmptySpotColoumn + 1) {
+                    change(col, row);
+                }
+
+                if (row == mEmptySpotRow && col == mEmptySpotColoumn - 1) {
+                    change(col, row);
+                }
+
+                if (row == mEmptySpotRow + 1 && col == mEmptySpotColoumn) {
+                    change(col, row);
+                }
+
+                if (row == mEmptySpotRow - 1 && col == mEmptySpotColoumn) {
+                    change(col, row);
+                }
+
+                // show the rearranged table
+                showTable();
+            }   else    {
+                switch (pushedView) {
+                    case 100:   {
+                        mStepsToFlush = 10;
+                        break;
+                    }
+
+                    case 300:   {
+                        mStepsToFlush = 30;
+                        break;
+                    }
+
+                    case 500: {
+                        mStepsToFlush = 50;
+                        break;
+                    }
+
+                    case 700:   {
+                        // reset the table
+                        gameTable.resetTable();
+                        // shuffle the tiles
+                        gameTable.shuffleTable(mStepsToFlush);
+                        // show the table
+                        showTable();
+                        break;
+                    }
+
+                    default:    {
+                        break;
+                    }
+                }
             }
-
-            col--;
-            row--;
-
-            // col, row position shows to the clicked tile's position
-            // now, if possible, swap the tile with the empty spot
-
-            if (row == mEmptySpotRow && col == mEmptySpotColoumn + 1) {
-                change(col, row);
-            }
-
-            if (row == mEmptySpotRow && col == mEmptySpotColoumn - 1) {
-                change(col, row);
-            }
-
-            if (row == mEmptySpotRow + 1 && col == mEmptySpotColoumn) {
-                change(col, row);
-            }
-
-            if (row == mEmptySpotRow - 1 && col == mEmptySpotColoumn) {
-                change(col, row);
-            }
-
-            // show the rearranged table
-            showTable();
         }
 
         //
