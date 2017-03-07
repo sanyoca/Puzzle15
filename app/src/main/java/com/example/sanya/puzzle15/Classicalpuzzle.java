@@ -93,7 +93,7 @@ public class Classicalpuzzle extends AppCompatActivity {
         }
 
         if (gameTable.isGameWon()) {
-            Toast.makeText(Classicalpuzzle.this, "You won!", Toast.LENGTH_LONG).show();
+            Toast.makeText(Classicalpuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
         }
     }
 

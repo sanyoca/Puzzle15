@@ -89,7 +89,7 @@ public class Picturepuzzle extends AppCompatActivity {
         }
 
         if (gameTable.isGameWon()) {
-            Toast.makeText(Picturepuzzle.this, "You won!", Toast.LENGTH_LONG).show();
+            Toast.makeText(Picturepuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
         }
     }
 

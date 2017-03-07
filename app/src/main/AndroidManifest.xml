@@ -15,6 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Classicalpuzzle"
+            android:label="Classical 15 puzzle"/>
+        <activity android:name=".Picturepuzzle"
+            android:label="15 puzzle with a picture"/>
+        <activity android:name=".Showrules"
+            android:label="Rules of 15 puzzle"/>
+
     </application>
 
 </manifest>

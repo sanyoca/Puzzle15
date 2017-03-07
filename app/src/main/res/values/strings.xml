@@ -4,4 +4,12 @@
     <string name="steps30">30 steps</string>
     <string name="steps50">50 steps</string>
     <string name="shuffle">Shuffle</string>
+    <string name="puzzle15">15 Puzzle</string>
+    <string name="classical">Classical puzzle</string>
+    <string name="solveapicture">Solve a picture</string>
+    <string name="classicalwithwalls">Classical with walls</string>
+    <string name="classicalwithholes">Classical with holes</string>
+    <string name="about">About the game - Rules</string>
+    <string name="quitgame">Quit game</string>
+    <string name="youwon">You won!</string>
 </resources>
