@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     board gameTable;
     int mStepsToFlush = 10;
+    boolean inGame = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public class board implements View.OnClickListener {
+    private class board implements View.OnClickListener {
         int[][] mPlayField = new int[6][6];
         int mEmptySpotRow;
         int mEmptySpotColoumn;
@@ -293,6 +294,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            inGame = true;
         }
 
         //
@@ -336,8 +338,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
-            return counter == 15;
+            return (counter == 15 && inGame);
         }
     }
 }
