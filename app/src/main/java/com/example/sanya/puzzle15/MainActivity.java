@@ -1,8 +1,8 @@
 package com.example.sanya.puzzle15;
 
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -10,9 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    board gameTable;
-    int mStepsToFlush = 10;
-    boolean inGame = false;
+    private board gameTable;
+    private int mStepsToFlush = 10;
+    private boolean inGame = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public void showTable() {
         int col, row;
         LinearLayout rowLayout;
-        // erase all previous children layout
+        // erase all previous children from the layouts
         rowLayout = (LinearLayout) findViewById(R.id.row1);
         rowLayout.removeAllViewsInLayout();
         rowLayout = (LinearLayout) findViewById(R.id.row2);
@@ -80,15 +80,13 @@ public class MainActivity extends AppCompatActivity {
                 LinearLayout ll = new LinearLayout(this);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
                 layoutParams.setMargins(10, 0, 0, 10);
-                //newTile.setLayoutParams(new LinearLayout.LayoutParams(220, 220));
                 newTile.setLayoutParams(layoutParams);
                 newTile.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
-                // only api 17+
-                // newTile.setId(View.generateViewId());
                 newTile.setTag(String.valueOf(e));
                 newTile.setOnClickListener(gameTable);
-                // only api 23+
-                // newTile.setBackgroundColor(colorResId);
+                if(!e.equals(" ")) {
+                    newTile.setBackgroundResource(R.drawable.roundedcorners);
+                }
                 rowLayout.addView(newTile);
             }
         }
