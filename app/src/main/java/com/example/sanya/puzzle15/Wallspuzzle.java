@@ -3,11 +3,12 @@ package com.example.sanya.puzzle15;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Wallspuzzle extends AppCompatActivity {
+public class Wallspuzzle extends AppCompatActivity implements View.OnClickListener{
     Gameboard table;
 
     @Override
@@ -17,6 +18,10 @@ public class Wallspuzzle extends AppCompatActivity {
 
         table = new Gameboard(this);
         showTable();
+        findViewById(R.id.button10).setOnClickListener(this);
+        findViewById(R.id.button30).setOnClickListener(this);
+        findViewById(R.id.button50).setOnClickListener(this);
+        findViewById(R.id.shufflebutton).setOnClickListener(this);
     }
 
     public void showTable() {
@@ -66,7 +71,7 @@ public class Wallspuzzle extends AppCompatActivity {
                 newTile.setLayoutParams(layoutParams);
                 newTile.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
                 newTile.setTag(String.valueOf(e));
-                newTile.setOnClickListener(table);
+                newTile.setOnClickListener(this);
                 if(!e.equals(" ")) {
                     newTile.setBackgroundResource(R.drawable.roundedcorners);
                 }
@@ -77,5 +82,92 @@ public class Wallspuzzle extends AppCompatActivity {
         if (table.isGameWon()) {
             Toast.makeText(Wallspuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void onClick(View v) {
+        int row = 1, col = 1;
+        boolean gotCha = false;
+        int tileNumber;
+        int pushedView = Integer.valueOf(v.getTag().toString());
+
+        if(pushedView <= 16) {
+            // the tag of the tile clicked on
+            String clickedTile = (String) v.getTag();
+            if (clickedTile.equals(" ")) {
+                tileNumber = 0;
+            } else {
+                tileNumber = pushedView;
+            }
+
+            // where is the clicked tile in the matrix?
+            while (row < 5 && !gotCha) {
+                while (col < 5 && !gotCha) {
+                    if (table.getBoardValue(col, row) == tileNumber) {
+                        gotCha = true;
+                    }
+                    col++;
+                }
+                row++;
+                if (!gotCha) col = 1;
+            }
+
+            col--;
+            row--;
+
+            // col, row position shows to the clicked tile's position
+            // now, if possible, swap the tile with the empty spot
+
+            if (row == table.mEmptySpotRow && col == table.mEmptySpotColoumn + 1) {
+                table.change(col, row);
+            }
+
+            if (row == table.mEmptySpotRow && col == table.mEmptySpotColoumn - 1) {
+                table.change(col, row);
+            }
+
+            if (row == table.mEmptySpotRow + 1 && col == table.mEmptySpotColoumn) {
+                table.change(col, row);
+            }
+
+            if (row == table.mEmptySpotRow - 1 && col == table.mEmptySpotColoumn) {
+                table.change(col, row);
+            }
+
+            // show the rearranged table
+            showTable();
+        }   else    {
+            switch (pushedView) {
+                // radiobutton 10 steps
+                case 100:   {
+                    table.mStepsToFlush = 10;
+                    break;
+                }
+                // radiobutton 30 steps
+                case 300:   {
+                    table.mStepsToFlush = 30;
+                    break;
+                }
+                // radiobutton 50 steps
+                case 500: {
+                    table.mStepsToFlush = 50;
+                    break;
+                }
+                // flush button
+                case 700:   {
+                    // reset the table
+                    table.resetTable();
+                    // shuffle the tiles
+                    table.shuffleTable();
+                    // show the table
+                    showTable();
+                    break;
+                }
+
+                default:    {
+                    break;
+                }
+            }
+        }
+
     }
 }
