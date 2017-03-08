@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.button_startclassical).setOnClickListener(this);
         findViewById(R.id.button_startpicture).setOnClickListener(this);
+        findViewById(R.id.button_startwalls).setOnClickListener(this);
         findViewById(R.id.button_rules).setOnClickListener(this);
     }
 
@@ -40,6 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             case R.id.button_rules: {
                 intentStart = new Intent(MainActivity.this, Showrules.class);
+                startActivity(intentStart);
+                break;
+            }
+            case R.id.button_startwalls: {
+                intentStart = new Intent(MainActivity.this, Wallspuzzle.class);
                 startActivity(intentStart);
                 break;
             }

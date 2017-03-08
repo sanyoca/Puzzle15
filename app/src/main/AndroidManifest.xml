@@ -20,6 +20,10 @@
             android:label="Classical 15 puzzle"/>
         <activity android:name=".Picturepuzzle"
             android:label="15 puzzle with a picture"/>
+        <activity android:name=".Wallspuzzle"
+            android:label="15 puzzle with a picture"/>
+        <activity android:name=".Gameboard"
+            android:label="15 puzzle with a picture"/>
         <activity android:name=".Showrules"
             android:label="Rules of 15 puzzle"/>
 
