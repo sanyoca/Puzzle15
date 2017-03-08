@@ -13,7 +13,6 @@ public class Gameboard extends AppCompatActivity implements View.OnClickListener
 
     public Gameboard(Context that)  {
         resetTable();
-        showTable();
     }
 
     /**
@@ -44,10 +43,6 @@ public class Gameboard extends AppCompatActivity implements View.OnClickListener
         mEmptySpotColoumn = 4;
     }
 
-    public void showTable() {
-
-    }
-
     /**
      *
      * @param whichCol the coloumn of the board
@@ -61,7 +56,7 @@ public class Gameboard extends AppCompatActivity implements View.OnClickListener
     /**
      * @return true, if the game is won
      */
-    private boolean isGameWon() {
+    public boolean isGameWon() {
         int col, row;
         int counter = 0;
 
