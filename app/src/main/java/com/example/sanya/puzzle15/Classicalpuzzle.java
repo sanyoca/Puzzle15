@@ -62,7 +62,6 @@ public class Classicalpuzzle extends AppCompatActivity {
         findViewById(R.id.shufflebutton).setOnClickListener(gameTable);
         // set up the mediaplayer volume and the audiomanager
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        mMediaPlayer.setVolume(50, 50);
         showTable();
     }
 
@@ -218,9 +217,9 @@ public class Classicalpuzzle extends AppCompatActivity {
 
                     case 700:   {
                         // reset the table
-                        gameTable.resetTable();
+                        resetTable();
                         // shuffle the tiles
-                        gameTable.shuffleTable(mStepsToFlush);
+                        shuffleTable(mStepsToFlush);
                         // show the table
                         showTable();
                         break;
