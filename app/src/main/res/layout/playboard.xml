@@ -33,29 +33,27 @@
         android:layout_marginTop="20dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            style="@style/wrapped">
 
             <RadioGroup
                 android:id="@+id/radiogroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                style="@style/wrapped">
 
                 <RadioButton
                     android:id="@+id/button10"
-                    style="@style/radiobuttons"
+                    style="@style/wrapped"
                     android:tag="100"
                     android:text="@string/steps10" />
 
                 <RadioButton
                     android:id="@+id/button30"
-                    style="@style/radiobuttons"
+                    style="@style/wrapped"
                     android:tag="300"
                     android:text="@string/steps30" />
 
                 <RadioButton
                     android:id="@+id/button50"
-                    style="@style/radiobuttons"
+                    style="@style/wrapped"
                     android:tag="500"
                     android:text="@string/steps50" />
 
@@ -64,15 +62,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
+            style="@style/ll_shufflebutton">
 
             <Button
                 android:id="@+id/shufflebutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                style="@style/wrapped"
                 android:tag="700"
                 android:text="@string/shuffle" />
         </LinearLayout>

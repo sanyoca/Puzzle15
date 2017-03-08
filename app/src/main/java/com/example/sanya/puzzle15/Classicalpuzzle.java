@@ -1,6 +1,9 @@
 package com.example.sanya.puzzle15;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -14,6 +17,37 @@ public class Classicalpuzzle extends AppCompatActivity {
     private int mStepsToFlush = 10;
     private boolean inGame = false;
 
+    private MediaPlayer mMediaPlayer;
+    private AudioManager mAudioManager;
+
+    /**
+     * if the media player stopped playback, release its resources
+     */
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
+
+    /**
+     * if focus changes, handle it properly
+     */
+    private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                    focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                mMediaPlayer.pause();
+                mMediaPlayer.seekTo(0);
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                mMediaPlayer.start();
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                releaseMediaPlayer();
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,19 +55,20 @@ public class Classicalpuzzle extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         gameTable = new board();
-
+        // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
         findViewById(R.id.button10).setOnClickListener(gameTable);
         findViewById(R.id.button30).setOnClickListener(gameTable);
         findViewById(R.id.button50).setOnClickListener(gameTable);
         findViewById(R.id.shufflebutton).setOnClickListener(gameTable);
-
+        // set up the mediaplayer volume and the audiomanager
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        mMediaPlayer.setVolume(50, 50);
         showTable();
     }
 
-    //
-    // displays the table values in for linear(vertical) layouts
-    //
-
+    /**
+     * displays the table values for linear(vertical) layouts
+     */
     public void showTable() {
         int col, row;
         LinearLayout rowLayout;
@@ -72,9 +107,6 @@ public class Classicalpuzzle extends AppCompatActivity {
                 if (Integer.valueOf(e) == 0) {
                     e = " ";
                 }
-                // If I left the commented lines in the code, it caused the app to crash on my phone (API 15)
-                // only api 23+
-                // int colorResId = getResources().getColor(R.color.tileColor, null);
                 newTile.setText(e);
                 newTile.setPadding(3, 3, 3, 3);
                 newTile.setTextSize(30);
@@ -97,23 +129,25 @@ public class Classicalpuzzle extends AppCompatActivity {
         }
     }
 
+    /**
+     * the class for the table and all other stuffs it handles
+     */
     private class board implements View.OnClickListener {
         int[][] mPlayField = new int[6][6];
         int mEmptySpotRow;
         int mEmptySpotColoumn;
 
-        //
-        // initializes the table, by calling resetTable()
-        //
-
+        /**
+         * initializes the table, by calling resetTable()
+         */
         private board() {
             resetTable();
         }
 
-        //
-        // the clicklistener that listens to the clicks, happen to tiles
-        //
-
+        /**
+         * handles the clicks on radiobuttons and the tiles
+         * @param v the view that was clicked on
+         */
         public void onClick(View v) {
             int row = 1, col = 1;
             boolean gotCha = false;
@@ -199,12 +233,11 @@ public class Classicalpuzzle extends AppCompatActivity {
             }
         }
 
-        //
-        // resets the table, setting the mPlayField array to the default state
-        // places 0 at 4,4
-        // sets the mEmptySpotColoumn and mEmptySpotRow to 4
-        //
-
+        /**
+         * resets the table, setting the mPlayField array to the default state
+         * places 0 at 4,4
+         * sets the mEmptySpotColoumn and mEmptySpotRow to 4
+         */
         private void resetTable() {
             int col, row;
 
@@ -224,11 +257,10 @@ public class Classicalpuzzle extends AppCompatActivity {
             mEmptySpotColoumn = 4;
         }
 
-        //
-        // shuffles the table, by moving the empty spot around
-        // @param steps for determining the number of moves
-        //
-
+        /**
+         * shuffles the table
+         * @param steps the number of moves to shuffle the table
+         */
         private void shuffleTable(int steps) {
             int previousMove = 0;
             boolean moved;
@@ -301,36 +333,45 @@ public class Classicalpuzzle extends AppCompatActivity {
             inGame = true;
         }
 
-        //
-        // returns the value, found at the given position
-        // @param whichCol the coloumn of the board
-        // @param whichRow the row of the board
-        //
-
+        /**
+         *
+         * @param whichCol the coloumn of the board
+         * @param whichRow the row of the board
+         * @return the value, foound at the given position
+         */
         private int getBoardValue(int whichCol, int whichRow) {
             return mPlayField[whichCol][whichRow];
         }
 
-        //
-        // switch the position of the empty spot
-        // and the spot, set by the @params
-        // @param switchCol the coloumn which to switch to
-        // @param switchRow the row which to switch to
-        //
 
+        /**
+         * switch the position of the empty spot, set by params
+         * @param switchCol the coloumn which to switch to
+         * @param switchRow the row which to switch to
+         */
         private void change(int switchCol, int switchRow) {
             int store = getBoardValue(switchCol, switchRow);
             mPlayField[switchCol][switchRow] = 0;
             mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
             mEmptySpotColoumn = switchCol;
             mEmptySpotRow = switchRow;
+            // whatever we do, release the media player first
+            releaseMediaPlayer();
+            // Can we get audio focus
+            int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                    AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
+            // yes, we can, play the click sound
+            if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                mMediaPlayer = MediaPlayer.create(Classicalpuzzle.this, R.raw.click);
+                mMediaPlayer.start();
+                mMediaPlayer.setOnCompletionListener(mCompletionListener);
+            }
         }
 
-        //
-        // returns true, if the game is won
-        // all the tiles are in their places
-        //
-
+        /**
+         * @return true, if the game is won
+         */
         private boolean isGameWon() {
             int col, row;
             int counter = 0;
@@ -343,6 +384,26 @@ public class Classicalpuzzle extends AppCompatActivity {
                 }
             }
             return (counter == 15 && inGame);
+        }
+    }
+
+    /**
+     * If the app quits, release the media player resources
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+
+    /**
+     * Clean up the media player by releasing its resources.
+     */
+    public void releaseMediaPlayer() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+            mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
         }
     }
 }

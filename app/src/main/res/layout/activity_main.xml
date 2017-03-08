@@ -7,10 +7,8 @@
     tools:context="com.example.sanya.puzzle15.MainActivity">
 
     <ImageView
-        android:contentDescription="background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        style="@style/startbackground"
+        android:contentDescription="@string/background"
         android:src="@drawable/bg_victorian" />
 
     <LinearLayout
@@ -20,61 +18,38 @@
 
         <TextView
             android:id="@+id/textview_gametitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal"
-            android:text="@string/puzzle15"
-            android:textColor="@android:color/black"
-            android:textSize="40sp" />
+            style="@style/gametitle"
+            android:text="@string/puzzle15" />
 
         <Button
             android:id="@+id/button_startclassical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            style="@style/gamebuttons"
             android:text="@string/classical" />
 
         <Button
             android:id="@+id/button_startpicture"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            style="@style/gamebuttons"
             android:text="@string/solveapicture" />
 
         <Button
             android:id="@+id/button_startwalls"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            style="@style/gamebuttons"
             android:text="@string/classicalwithwalls" />
 
         <Button
             android:id="@+id/button_startholes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            style="@style/gamebuttons"
             android:text="@string/classicalwithholes" />
 
         <Button
             android:id="@+id/button_rules"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            style="@style/gamebuttons"
             android:text="@string/about" />
 
         <Button
             android:id="@+id/button_quitgame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            style="@style/gamebuttons"
             android:text="@string/quitgame" />
+
     </LinearLayout>
 </RelativeLayout>
