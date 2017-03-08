@@ -12,7 +12,6 @@ public class Gameboard extends AppCompatActivity implements View.OnClickListener
     private Context contextThat;
 
     public Gameboard(Context that)  {
-        contextThat = that;
         resetTable();
         showTable();
     }
