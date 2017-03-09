@@ -30,7 +30,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".Wallspuzzle"
+        <activity android:name=".Holespuzzle"
             android:label="15 puzzle with walls"
             android:theme="@style/subTheme">
             <meta-data

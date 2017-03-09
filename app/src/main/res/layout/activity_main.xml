@@ -32,18 +32,18 @@
             android:text="@string/solveapicture" />
 
         <Button
-            android:id="@+id/button_startwalls"
-            style="@style/gamebuttons"
-            android:clickable="false"
-            android:enabled="false"
-            android:text="@string/classicalwithwalls" />
-
-        <Button
             android:id="@+id/button_startholes"
             style="@style/gamebuttons"
             android:clickable="false"
             android:enabled="false"
             android:text="@string/classicalwithholes" />
+
+        <Button
+            android:id="@+id/button_startwalls"
+            style="@style/gamebuttons"
+            android:clickable="false"
+            android:enabled="false"
+            android:text="@string/classicalwithwalls" />
 
         <Button
             android:id="@+id/button_rules"

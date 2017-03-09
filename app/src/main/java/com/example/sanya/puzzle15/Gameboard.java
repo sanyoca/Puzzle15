@@ -7,9 +7,27 @@ public class Gameboard extends AppCompatActivity {
     private boolean inGame = false;
     private int mStepsToFlush = 10;
     private int mEmptySpotRow, mEmptySpotColoumn;
+    private int[][] holes;
+    private boolean withHoles = false;
 
     public Gameboard() {
         resetTable();
+    }
+
+    /**
+     * this is for later use, with the 'classical with holes' game mode
+     * the array received here, must be built, following the next rules:
+     * - array must be 4x4
+     * - the spots, where tiles can be placed, must be valued '0'
+     * - the spots, where there are holes, must be valued '-1'
+     * @param whereAreTheHoles an array that contains the positions of the holes
+     */
+    public Gameboard(int[][] whereAreTheHoles)   {
+        holes = whereAreTheHoles;
+        if(holes.length != 4 || holes[1].length != 4)   {
+            // display some error message, maybe "throw an exception" (?)
+        }
+        withHoles = true;
     }
 
     /**
@@ -33,6 +51,17 @@ public class Gameboard extends AppCompatActivity {
         for (row = 1; row <= 4; row++) {
             for (col = 1; col <= 4; col++) {
                 mPlayField[col][row] = (row - 1) * 4 + col;
+            }
+        }
+
+        // if playing with holes, mark the holes' positions with '-1'
+        if(withHoles)   {
+            for (row = 1; row <= 4; row++) {
+                for (col = 1; col <= 4; col++) {
+                    if(holes[col][row] == 0) {
+                        mPlayField[col][row] = -1;
+                    }
+                }
             }
         }
 
@@ -63,7 +92,7 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving up
-                if (direction == 1 && mEmptySpotRow > 1) {
+                if (direction == 1 && mEmptySpotRow > 1 && mPlayField[mEmptySpotColoumn][mEmptySpotRow - 1] != -1) {
                     store = mPlayField[mEmptySpotColoumn][mEmptySpotRow - 1];
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow - 1] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -74,7 +103,7 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving right
-                if (direction == 2 && mEmptySpotColoumn < 4) {
+                if (direction == 2 && mEmptySpotColoumn < 4 && mPlayField[mEmptySpotColoumn + 1][mEmptySpotRow] != -1) {
                     store = mPlayField[mEmptySpotColoumn + 1][mEmptySpotRow];
                     mPlayField[mEmptySpotColoumn + 1][mEmptySpotRow] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -85,7 +114,7 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving left
-                if (direction == 3 && mEmptySpotColoumn > 1) {
+                if (direction == 3 && mEmptySpotColoumn > 1 && mPlayField[mEmptySpotColoumn - 1][mEmptySpotRow] != -1) {
                     store = mPlayField[mEmptySpotColoumn - 1][mEmptySpotRow];
                     mPlayField[mEmptySpotColoumn - 1][mEmptySpotRow] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -96,7 +125,7 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving down
-                if (direction == 4 && mEmptySpotRow < 4) {
+                if (direction == 4 && mEmptySpotRow < 4 && mPlayField[mEmptySpotColoumn][mEmptySpotRow +1] != -1) {
                     store = mPlayField[mEmptySpotColoumn][mEmptySpotRow + 1];
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow + 1] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;

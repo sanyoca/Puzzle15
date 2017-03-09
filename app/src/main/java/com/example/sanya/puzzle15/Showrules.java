@@ -15,6 +15,7 @@ public class Showrules extends AppCompatActivity {
         WebView rulesWebView = (WebView) findViewById(R.id.rules_webview);
         String intro = "<h1 style='text-align:center'>The rules</h1><p align='justify'>" + getString(R.string.rules1) + "</p>";
         intro = intro + "<h1 style='text-align:center'>History</h1><p align='justify'>" + getString(R.string.rules2) + "</p>";
+        intro = intro + "<p align='justify'>Source: https://en.wikipedia.org/wiki/15_puzzle</p>";
         rulesWebView.loadData(intro, "text/html", null);
     }
 }
