@@ -8,17 +8,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class Picturepuzzle extends AppCompatActivity implements View.OnClickListener{
+public class Picturepuzzle extends AppCompatActivity implements View.OnClickListener {
     Gameboard table;
-    private int mStepsToFlush = 10;
-    private boolean inGame = false;
-    private int[] intImageResources = {0, R.drawable.horse_1, R.drawable.horse_2, R.drawable.horse_3, R.drawable.horse_4, R.drawable.horse_5, R.drawable.horse_6, R.drawable.horse_7, R.drawable.horse_8, R.drawable.horse_9, R.drawable.horse_10,
-            R.drawable.horse_11, R.drawable.horse_12, R.drawable.horse_13, R.drawable.horse_14, R.drawable.horse_15, R.drawable.horse_16};
+    private int[] intImageResources = {0, R.drawable.horse_1, R.drawable.horse_2, R.drawable.horse_3, R.drawable.horse_4, R.drawable.horse_5, R.drawable.horse_6, R.drawable.horse_7, R.drawable.horse_8, R.drawable.horse_9, R.drawable.horse_10, R.drawable.horse_11, R.drawable.horse_12, R.drawable.horse_13, R.drawable.horse_14, R.drawable.horse_15, R.drawable.horse_16};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playboard);
+        // still no lolligaggin with the orientation !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         table = new Gameboard();
@@ -85,6 +83,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
 
     /**
      * handles the clicks on 'tiles' and the radio buttons
+     *
      * @param v the view that was clicked on
      */
     public void onClick(View v) {
@@ -92,7 +91,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         boolean gotCha = false;
         int tileNumber;
         int pushedView = Integer.valueOf(v.getTag().toString());
-
+        // a tile was pushed?
         if (pushedView <= 16) {
             // the tag of the tile clicked on
             String clickedTile = (String) v.getTag();
@@ -120,36 +119,23 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
             // col, row position shows to the clicked tile's position
             // now, if possible, swap the tile with the empty spot
 
-            if (row == table.mEmptySpotRow && col == table.mEmptySpotColoumn + 1) {
-                table.change(col, row);
-            }
-
-            if (row == table.mEmptySpotRow && col == table.mEmptySpotColoumn - 1) {
-                table.change(col, row);
-            }
-
-            if (row == table.mEmptySpotRow + 1 && col == table.mEmptySpotColoumn) {
-                table.change(col, row);
-            }
-
-            if (row == table.mEmptySpotRow - 1 && col == table.mEmptySpotColoumn) {
-                table.change(col, row);
-            }
+            table.moveIfCan(col, row);
 
             // show the rearranged table
             showTable();
+            // not a tile was clicked, but a radiobutton or the flush button
         } else {
             switch (pushedView) {
                 case 100: {
-                    mStepsToFlush = 10;
+                    table.setFlushStep(10);
                     break;
                 }
                 case 300: {
-                    mStepsToFlush = 30;
+                    table.setFlushStep(30);
                     break;
                 }
                 case 500: {
-                    mStepsToFlush = 50;
+                    table.setFlushStep(50);
                     break;
                 }
                 case 700: {

@@ -10,15 +10,13 @@ import android.widget.Toast;
 
 public class Classicalpuzzle extends AppCompatActivity implements View.OnClickListener {
     Gameboard table;
-    private int mStepsToFlush = 10;
-    private boolean inGame = false;
-    private int[] intImageResources = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10,
-            R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
+    private int[] intImageResources = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playboard);
+        // no lolligaggin with the screen !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         table = new Gameboard();
@@ -48,8 +46,6 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
 
         for (row = 1; row <= 4; row++) {
             for (col = 1; col <= 4; col++) {
-
-
                 ImageView newTile = new ImageView(Classicalpuzzle.this);
                 switch (row) {
                     case 1:
@@ -78,7 +74,6 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
                 rowLayout.addView(newTile);
             }
         }
-
         if (table.isGameWon()) {
             Toast.makeText(Classicalpuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
         }
@@ -86,6 +81,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
 
     /**
      * handles the clicks on 'tiles' and the radio buttons
+     *
      * @param v the view that was clicked on
      */
     public void onClick(View v) {
@@ -93,7 +89,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
         boolean gotCha = false;
         int tileNumber;
         int pushedView = Integer.valueOf(v.getTag().toString());
-
+        // a tile was pushed?
         if (pushedView <= 16) {
             // the tag of the tile clicked on
             String clickedTile = (String) v.getTag();
@@ -121,39 +117,30 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
             // col, row position shows to the clicked tile's position
             // now, if possible, swap the tile with the empty spot
 
-            if (row == table.mEmptySpotRow && col == table.mEmptySpotColoumn + 1) {
-                table.change(col, row);
-            }
-
-            if (row == table.mEmptySpotRow && col == table.mEmptySpotColoumn - 1) {
-                table.change(col, row);
-            }
-
-            if (row == table.mEmptySpotRow + 1 && col == table.mEmptySpotColoumn) {
-                table.change(col, row);
-            }
-
-            if (row == table.mEmptySpotRow - 1 && col == table.mEmptySpotColoumn) {
-                table.change(col, row);
-            }
+            table.moveIfCan(col, row);
 
             // show the rearranged table
             showTable();
+            // not a tile was clicked, but a radiobutton or the flush button
         } else {
             switch (pushedView) {
                 case 100: {
-                    mStepsToFlush = 10;
+                    // set the flush steps to 10
+                    table.setFlushStep(10);
                     break;
                 }
                 case 300: {
-                    mStepsToFlush = 30;
+                    // set the flush steps to 30
+                    table.setFlushStep(30);
                     break;
                 }
                 case 500: {
-                    mStepsToFlush = 50;
+                    // set the flush steps to 50
+                    table.setFlushStep(50);
                     break;
                 }
                 case 700: {
+                    // the flush button
                     // reset the table
                     table.resetTable();
                     // shuffle the tiles

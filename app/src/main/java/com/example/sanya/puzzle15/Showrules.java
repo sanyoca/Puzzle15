@@ -11,9 +11,10 @@ public class Showrules extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_rules);
 
+        // reads the rules from the strings.xmls and convert them into the webview
         WebView rulesWebView = (WebView) findViewById(R.id.rules_webview);
-        String intro = "<h1 style='text-align:center'>The rules</h1><p align='justify'>"+getString(R.string.rules1)+"</p>";
-        intro = intro + "<h1 style='text-align:center'>History</h1><p align='justify'>"+getString(R.string.rules2)+"</p>";
+        String intro = "<h1 style='text-align:center'>The rules</h1><p align='justify'>" + getString(R.string.rules1) + "</p>";
+        intro = intro + "<h1 style='text-align:center'>History</h1><p align='justify'>" + getString(R.string.rules2) + "</p>";
         rulesWebView.loadData(intro, "text/html", null);
     }
 }

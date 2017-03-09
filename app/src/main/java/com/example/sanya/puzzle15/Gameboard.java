@@ -4,26 +4,24 @@ import android.support.v7.app.AppCompatActivity;
 
 public class Gameboard extends AppCompatActivity {
     private int[][] mPlayField = new int[6][6];
-    protected int mEmptySpotRow;
-    protected int mEmptySpotColoumn;
     private boolean inGame = false;
-    int mStepsToFlush = 10;
+    private int mStepsToFlush = 10;
+    private int mEmptySpotRow, mEmptySpotColoumn;
 
-    public Gameboard()  {
+    public Gameboard() {
         resetTable();
-        // set up the mediaplayer volume and the audiomanager
     }
 
     /**
      * sets up the table, like this
-     * 0  0  0  0  0  0
-     * 0  1  2  3  4  0
-     * 0  5  6  7  8  0
-     * 0  9 10 11 12  0
-     * 0 13 14 15  0  0
-     * 0  0  0  0  0  0
+     * -1 -1 -1 -1 -1 -1
+     * -1  1  2  3  4 -1
+     * -1  5  6  7  8 -1
+     * -1  9 10 11 12 -1
+     * -1 13 14 15  0 -1
+     * -1 -1 -1 -1 -1 -1
      */
-    public void resetTable()    {
+    public void resetTable() {
         int col, row;
 
         for (row = 0; row <= 5; row++) {
@@ -49,8 +47,7 @@ public class Gameboard extends AppCompatActivity {
     public void shuffleTable() {
         int previousMove = 0;
         boolean moved;
-        int direction;
-        int store;
+        int direction, store;
 
         for (int move = 1; move <= mStepsToFlush; move++) {
             moved = false;
@@ -115,11 +112,11 @@ public class Gameboard extends AppCompatActivity {
                 }
             }
         }
+        // we are in game, important to set it for the isGameWon method
         inGame = true;
     }
 
     /**
-     *
      * @param whichCol the coloumn of the board
      * @param whichRow the row of the board
      * @return the value, found at the given position
@@ -146,7 +143,38 @@ public class Gameboard extends AppCompatActivity {
     }
 
     /**
+     * @param steps the moves to shuffle the table, used by shuffleTable method
+     */
+    public void setFlushStep(int steps) {
+        mStepsToFlush = steps;
+    }
+
+    /**
+     * @param intCol the coloumn
+     * @param intRow the row
+     *               of the tile to be moved, if possible
+     */
+    public void moveIfCan(int intCol, int intRow) {
+        if (intRow == mEmptySpotRow && intCol == mEmptySpotColoumn + 1) {
+            change(intCol, intRow);
+        }
+
+        if (intRow == mEmptySpotRow && intCol == mEmptySpotColoumn - 1) {
+            change(intCol, intRow);
+        }
+
+        if (intRow == mEmptySpotRow + 1 && intCol == mEmptySpotColoumn) {
+            change(intCol, intRow);
+        }
+
+        if (intRow == mEmptySpotRow - 1 && intCol == mEmptySpotColoumn) {
+            change(intCol, intRow);
+        }
+    }
+
+    /**
      * switch the position of the empty spot, set by params
+     *
      * @param switchCol the coloumn which to switch to
      * @param switchRow the row which to switch to
      */
