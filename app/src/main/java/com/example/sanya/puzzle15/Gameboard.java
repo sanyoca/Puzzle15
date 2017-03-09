@@ -1,8 +1,6 @@
 package com.example.sanya.puzzle15;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 public class Gameboard extends AppCompatActivity {
     private int[][] mPlayField = new int[6][6];
@@ -11,8 +9,9 @@ public class Gameboard extends AppCompatActivity {
     private boolean inGame = false;
     int mStepsToFlush = 10;
 
-    public Gameboard(Context that)  {
+    public Gameboard()  {
         resetTable();
+        // set up the mediaplayer volume and the audiomanager
     }
 
     /**
@@ -38,6 +37,7 @@ public class Gameboard extends AppCompatActivity {
                 mPlayField[col][row] = (row - 1) * 4 + col;
             }
         }
+
         mPlayField[4][4] = 0;
         mEmptySpotRow = 4;
         mEmptySpotColoumn = 4;
@@ -45,7 +45,6 @@ public class Gameboard extends AppCompatActivity {
 
     /**
      * shuffles the table
-     * @param steps the number of moves to shuffle the table
      */
     public void shuffleTable() {
         int previousMove = 0;
@@ -158,5 +157,4 @@ public class Gameboard extends AppCompatActivity {
         mEmptySpotColoumn = switchCol;
         mEmptySpotRow = switchRow;
     }
-
 }

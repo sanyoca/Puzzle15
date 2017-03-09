@@ -17,15 +17,40 @@
         </activity>
 
         <activity android:name=".Classicalpuzzle"
-            android:label="Classical 15 puzzle"/>
+            android:label="Classical 15 puzzle"
+            android:theme="@style/subTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".Picturepuzzle"
-            android:label="15 puzzle with a picture"/>
+            android:label="15 puzzle with a picture"
+            android:theme="@style/subTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".Wallspuzzle"
-            android:label="15 puzzle with a picture"/>
+            android:label="15 puzzle with walls"
+            android:theme="@style/subTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".Gameboard"
-            android:label="15 puzzle with a picture"/>
+            android:label="15 puzzle with a picture"
+            android:theme="@style/subTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".Showrules"
-            android:label="Rules of 15 puzzle"/>
+            android:label="Rules of 15 puzzle"
+            android:theme="@style/subTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
     </application>
 
