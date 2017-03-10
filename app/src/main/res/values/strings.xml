@@ -5,7 +5,7 @@
     <string name="classical">Classical puzzle</string>
     <string name="solveapicture">Solve a picture</string>
     <string name="classicalwithwalls">Classical with walls</string>
-    <string name="classicalwithholes">Classical with holes</string>
+    <string name="classicalwithholes">Classical with a hole</string>
     <string name="about">About the game - Rules</string>
     <string name="quitgame">Quit game</string>
     <string name="steps10">10 steps</string>

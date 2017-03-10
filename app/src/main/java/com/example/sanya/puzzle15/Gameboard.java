@@ -2,32 +2,33 @@ package com.example.sanya.puzzle15;
 
 import android.support.v7.app.AppCompatActivity;
 
+import static java.lang.Boolean.FALSE;
+
 public class Gameboard extends AppCompatActivity {
     private int[][] mPlayField = new int[6][6];
     private boolean inGame = false;
     private int mStepsToFlush = 10;
     private int mEmptySpotRow, mEmptySpotColoumn;
-    private int[][] holes;
+
+    // ha a tömbözést elvetem, törölni kell ezt a sort és csak az utána következő maradhat meg
+    private int[][] holes = new int [][] {{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}};
+    private int intHoleCol, intHoleRow;
     private boolean withHoles = false;
+    static final boolean HOLE = true;
+    static final boolean NORMAL = false;
 
-    public Gameboard() {
-        resetTable();
-    }
-
-    /**
-     * this is for later use, with the 'classical with holes' game mode
-     * the array received here, must be built, following the next rules:
-     * - array must be 4x4
-     * - the spots, where tiles can be placed, must be valued '0'
-     * - the spots, where there are holes, must be valued '-1'
-     * @param whereAreTheHoles an array that contains the positions of the holes
-     */
-    public Gameboard(int[][] whereAreTheHoles)   {
-        holes = whereAreTheHoles;
-        if(holes.length != 4 || holes[1].length != 4)   {
-            // display some error message, maybe "throw an exception" (?)
+    public Gameboard(boolean isItAHoleGame) {
+        // if it is a hole game, place the hole in a random position, except for (4,4), what is the empty spot's default spot
+        if(isItAHoleGame)   {
+            do {
+                intHoleCol = (int) (Math.random() * 4) + 1;
+                intHoleRow = (int) (Math.random() * 4) + 1;
+            } while (intHoleCol * intHoleCol == 16);
+            // ez a sor is felesleges lesz
+            holes[intHoleCol][intHoleRow] = -1;
+            withHoles = true;
         }
-        withHoles = true;
+        resetTable();
     }
 
     /**
@@ -54,11 +55,14 @@ public class Gameboard extends AppCompatActivity {
             }
         }
 
-        // if playing with holes, mark the holes' positions with '-1'
+        // if playing with hole, mark the hole' position back to '-1'
+//
+//      if(withHoles)  mPlayField[intHoleCol][intHoleRow] = -1;
+//        a következő sorok feleslegesek
         if(withHoles)   {
             for (row = 1; row <= 4; row++) {
                 for (col = 1; col <= 4; col++) {
-                    if(holes[col][row] == 0) {
+                    if(isThisHole(col, row)){
                         mPlayField[col][row] = -1;
                     }
                 }
@@ -92,7 +96,8 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving up
-                if (direction == 1 && mEmptySpotRow > 1 && mPlayField[mEmptySpotColoumn][mEmptySpotRow - 1] != -1) {
+                // if (direction == 1 && mEmptySpotRow > 1 && !isThisHole(mEmptySpotColoumn, mEmptySpotRow - 1)) {
+                if (direction == 1 && mEmptySpotRow > 1 && holes[mEmptySpotColoumn][mEmptySpotRow - 1] != -1) {
                     store = mPlayField[mEmptySpotColoumn][mEmptySpotRow - 1];
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow - 1] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -103,7 +108,8 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving right
-                if (direction == 2 && mEmptySpotColoumn < 4 && mPlayField[mEmptySpotColoumn + 1][mEmptySpotRow] != -1) {
+                // if (direction == 2 && mEmptySpotColoumn < 4 && !isThisHole(mPlayField(mEmptySpotColoumn + 1, mEmptySpotRow)) {
+                if (direction == 2 && mEmptySpotColoumn < 4 && holes[mEmptySpotColoumn + 1][mEmptySpotRow] != -1) {
                     store = mPlayField[mEmptySpotColoumn + 1][mEmptySpotRow];
                     mPlayField[mEmptySpotColoumn + 1][mEmptySpotRow] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -114,7 +120,8 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving left
-                if (direction == 3 && mEmptySpotColoumn > 1 && mPlayField[mEmptySpotColoumn - 1][mEmptySpotRow] != -1) {
+                // if (direction == 3 && mEmptySpotColoumn > 1 && !isThisHole(mEmptySpotColoumn - 1, mEmptySpotRow)) {
+                if (direction == 3 && mEmptySpotColoumn > 1 && holes[mEmptySpotColoumn - 1][mEmptySpotRow] != -1) {
                     store = mPlayField[mEmptySpotColoumn - 1][mEmptySpotRow];
                     mPlayField[mEmptySpotColoumn - 1][mEmptySpotRow] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -125,7 +132,8 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving down
-                if (direction == 4 && mEmptySpotRow < 4 && mPlayField[mEmptySpotColoumn][mEmptySpotRow +1] != -1) {
+                // if (direction == 4 && mEmptySpotRow < 4 && !isThisHole(mEmptySpotColoumn, mEmptySpotRow +1)) {
+                if (direction == 4 && mEmptySpotRow < 4 && holes[mEmptySpotColoumn][mEmptySpotRow +1] != -1) {
                     store = mPlayField[mEmptySpotColoumn][mEmptySpotRow + 1];
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow + 1] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -168,7 +176,7 @@ public class Gameboard extends AppCompatActivity {
                 }
             }
         }
-        return (counter == 15 && inGame);
+        return ((counter == 15 && inGame) || (counter == 14 && inGame && withHoles));
     }
 
     /**
@@ -181,7 +189,7 @@ public class Gameboard extends AppCompatActivity {
     /**
      * @param intCol the coloumn
      * @param intRow the row
-     *               of the tile to be moved, if possible
+     *               of the tile to be moved to the empty spot, if possible
      */
     public void moveIfCan(int intCol, int intRow) {
         if (intRow == mEmptySpotRow && intCol == mEmptySpotColoumn + 1) {
@@ -213,5 +221,16 @@ public class Gameboard extends AppCompatActivity {
         mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
         mEmptySpotColoumn = switchCol;
         mEmptySpotRow = switchRow;
+    }
+
+    /**
+     *
+     * @param intHoleCol the coloumn
+     * @param intHoleRow the row of the position
+     * @return true, if the hole is at the given position
+     */
+    public boolean isThisHole(int intHoleCol, int intHoleRow)  {
+        // return (mPlayField[intHoleCol][intHoleRow] == -1);
+        return (holes[intHoleCol][intHoleRow] == -1);
     }
 }

@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // set up the onClicklistener for the game buttons
         findViewById(R.id.button_startclassical).setOnClickListener(this);
         findViewById(R.id.button_startpicture).setOnClickListener(this);
+        findViewById(R.id.button_startholes).setOnClickListener(this);
+        findViewById(R.id.button_quitgame).setOnClickListener(this);
         findViewById(R.id.button_rules).setOnClickListener(this);
     }
 
@@ -47,11 +49,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentStart);
                 break;
             }
+            // starts the hole version game
+            case R.id.button_startholes: {
+                intentStart = new Intent(MainActivity.this, Holespuzzle.class);
+                startActivity(intentStart);
+                break;
+            }
+
             // displays the rules and history
             case R.id.button_rules: {
                 intentStart = new Intent(MainActivity.this, Showrules.class);
                 startActivity(intentStart);
                 break;
+            }
+
+            // quits the game
+            case R.id.button_quitgame:  {
+                this.finishAffinity();
             }
             default: {
                 break;

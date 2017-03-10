@@ -19,7 +19,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         // still no lolligaggin with the orientation !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        table = new Gameboard();
+        table = new Gameboard(Gameboard.NORMAL);
         // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
         findViewById(R.id.button10).setOnClickListener(this);
         findViewById(R.id.button30).setOnClickListener(this);
