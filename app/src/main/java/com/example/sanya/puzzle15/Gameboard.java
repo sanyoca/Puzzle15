@@ -1,5 +1,6 @@
 package com.example.sanya.puzzle15;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 
 import static java.lang.Boolean.FALSE;
@@ -173,22 +174,27 @@ public class Gameboard extends AppCompatActivity {
      * @param intRow the row
      *               of the tile to be moved to the empty spot, if possible
      */
-    public void moveIfCan(int intCol, int intRow) {
+    public boolean moveIfCan(int intCol, int intRow) {
         if (intRow == mEmptySpotRow && intCol == mEmptySpotColoumn + 1) {
             change(intCol, intRow);
+            return true;
         }
 
         if (intRow == mEmptySpotRow && intCol == mEmptySpotColoumn - 1) {
             change(intCol, intRow);
+            return true;
         }
 
         if (intRow == mEmptySpotRow + 1 && intCol == mEmptySpotColoumn) {
             change(intCol, intRow);
+            return true;
         }
 
         if (intRow == mEmptySpotRow - 1 && intCol == mEmptySpotColoumn) {
             change(intCol, intRow);
+            return true;
         }
+        return false;
     }
 
     /**

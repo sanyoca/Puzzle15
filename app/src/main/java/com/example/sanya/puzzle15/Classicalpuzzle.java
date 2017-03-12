@@ -1,6 +1,7 @@
 package com.example.sanya.puzzle15;
 
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -116,7 +117,9 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
             // col, row position shows to the clicked tile's position
             // now, if possible, swap the tile with the empty spot
 
-            table.moveIfCan(col, row);
+            if(table.moveIfCan(col, row))   {
+                // here comes the click noise handling
+            }
 
             // show the rearranged table
             showTable();
