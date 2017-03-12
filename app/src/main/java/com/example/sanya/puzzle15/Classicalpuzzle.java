@@ -81,7 +81,6 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
 
     /**
      * handles the clicks on 'tiles' and the radio buttons
-     *
      * @param v the view that was clicked on
      */
     public void onClick(View v) {

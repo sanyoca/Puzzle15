@@ -10,8 +10,6 @@ public class Gameboard extends AppCompatActivity {
     private int mStepsToFlush = 10;
     private int mEmptySpotRow, mEmptySpotColoumn;
 
-    // ha a tömbözést elvetem, törölni kell ezt a sort és csak az utána következő maradhat meg
-    private int[][] holes = new int [][] {{0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}};
     private int intHoleCol, intHoleRow;
     private boolean withHoles = false;
     static final boolean HOLE = true;
@@ -24,8 +22,6 @@ public class Gameboard extends AppCompatActivity {
                 intHoleCol = (int) (Math.random() * 4) + 1;
                 intHoleRow = (int) (Math.random() * 4) + 1;
             } while (intHoleCol * intHoleCol == 16);
-            // ez a sor is felesleges lesz
-            holes[intHoleCol][intHoleRow] = -1;
             withHoles = true;
         }
         resetTable();
@@ -56,18 +52,8 @@ public class Gameboard extends AppCompatActivity {
         }
 
         // if playing with hole, mark the hole' position back to '-1'
-//
-//      if(withHoles)  mPlayField[intHoleCol][intHoleRow] = -1;
-//        a következő sorok feleslegesek
-        if(withHoles)   {
-            for (row = 1; row <= 4; row++) {
-                for (col = 1; col <= 4; col++) {
-                    if(isThisHole(col, row)){
-                        mPlayField[col][row] = -1;
-                    }
-                }
-            }
-        }
+
+        if(withHoles)  mPlayField[intHoleCol][intHoleRow] = -1;
 
         mPlayField[4][4] = 0;
         mEmptySpotRow = 4;
@@ -96,8 +82,7 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving up
-                // if (direction == 1 && mEmptySpotRow > 1 && !isThisHole(mEmptySpotColoumn, mEmptySpotRow - 1)) {
-                if (direction == 1 && mEmptySpotRow > 1 && holes[mEmptySpotColoumn][mEmptySpotRow - 1] != -1) {
+                if (direction == 1 && mEmptySpotRow > 1 && !isThisHole(mEmptySpotColoumn, mEmptySpotRow - 1)) {
                     store = mPlayField[mEmptySpotColoumn][mEmptySpotRow - 1];
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow - 1] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -108,8 +93,7 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving right
-                // if (direction == 2 && mEmptySpotColoumn < 4 && !isThisHole(mPlayField(mEmptySpotColoumn + 1, mEmptySpotRow)) {
-                if (direction == 2 && mEmptySpotColoumn < 4 && holes[mEmptySpotColoumn + 1][mEmptySpotRow] != -1) {
+                if (direction == 2 && mEmptySpotColoumn < 4 && !isThisHole(mEmptySpotColoumn + 1, mEmptySpotRow)) {
                     store = mPlayField[mEmptySpotColoumn + 1][mEmptySpotRow];
                     mPlayField[mEmptySpotColoumn + 1][mEmptySpotRow] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -120,8 +104,7 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving left
-                // if (direction == 3 && mEmptySpotColoumn > 1 && !isThisHole(mEmptySpotColoumn - 1, mEmptySpotRow)) {
-                if (direction == 3 && mEmptySpotColoumn > 1 && holes[mEmptySpotColoumn - 1][mEmptySpotRow] != -1) {
+                if (direction == 3 && mEmptySpotColoumn > 1 && !isThisHole(mEmptySpotColoumn - 1, mEmptySpotRow)) {
                     store = mPlayField[mEmptySpotColoumn - 1][mEmptySpotRow];
                     mPlayField[mEmptySpotColoumn - 1][mEmptySpotRow] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -132,8 +115,7 @@ public class Gameboard extends AppCompatActivity {
                 }
 
                 // moving down
-                // if (direction == 4 && mEmptySpotRow < 4 && !isThisHole(mEmptySpotColoumn, mEmptySpotRow +1)) {
-                if (direction == 4 && mEmptySpotRow < 4 && holes[mEmptySpotColoumn][mEmptySpotRow +1] != -1) {
+                if (direction == 4 && mEmptySpotRow < 4 && !isThisHole(mEmptySpotColoumn, mEmptySpotRow +1)) {
                     store = mPlayField[mEmptySpotColoumn][mEmptySpotRow + 1];
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow + 1] = 0;
                     mPlayField[mEmptySpotColoumn][mEmptySpotRow] = store;
@@ -211,7 +193,6 @@ public class Gameboard extends AppCompatActivity {
 
     /**
      * switch the position of the empty spot, set by params
-     *
      * @param switchCol the coloumn which to switch to
      * @param switchRow the row which to switch to
      */
@@ -224,13 +205,11 @@ public class Gameboard extends AppCompatActivity {
     }
 
     /**
-     *
      * @param intHoleCol the coloumn
      * @param intHoleRow the row of the position
      * @return true, if the hole is at the given position
      */
     public boolean isThisHole(int intHoleCol, int intHoleRow)  {
-        // return (mPlayField[intHoleCol][intHoleRow] == -1);
-        return (holes[intHoleCol][intHoleRow] == -1);
+        return (mPlayField[intHoleCol][intHoleRow] == -1);
     }
 }
