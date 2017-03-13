@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -73,11 +74,17 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playboard);
+        Button b100 = (Button) findViewById(R.id.button10);
+        b100.setText(R.string.steps100);
+        Button b300 = (Button) findViewById(R.id.button30);
+        b300.setText(R.string.steps300);
+        Button b500 = (Button) findViewById(R.id.button50);
+        b500.setText(R.string.steps500);
+
         View vHorizontal = findViewById(R.id.horizontalline);
         vHorizontal.setVisibility(View.VISIBLE);
         View vVertical = findViewById(R.id.verticalline);
         vVertical.setVisibility(View.VISIBLE);
-
         // no lolligaggin with the screen !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -99,6 +106,7 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
     public void showTable() {
         int col, row;
         LinearLayout rowLayout;
+        View viewLine;
         // erase all previous children from the layouts
         rowLayout = (LinearLayout) findViewById(R.id.row1);
         rowLayout.removeAllViewsInLayout();
@@ -209,18 +217,18 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
         } else {
             switch (pushedView) {
                 case 100: {
-                    // set the flush steps to 10
-                    table.setFlushStep(10);
+                    // set the flush steps to 100
+                    table.setFlushStep(100);
                     break;
                 }
                 case 300: {
-                    // set the flush steps to 30
-                    table.setFlushStep(30);
+                    // set the flush steps to 300
+                    table.setFlushStep(300);
                     break;
                 }
                 case 500: {
-                    // set the flush steps to 50
-                    table.setFlushStep(50);
+                    // set the flush steps to 500
+                    table.setFlushStep(500);
                     break;
                 }
                 case 700: {

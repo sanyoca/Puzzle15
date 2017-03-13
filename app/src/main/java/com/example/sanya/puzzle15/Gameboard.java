@@ -119,7 +119,6 @@ public class Gameboard extends AppCompatActivity {
         boolean moved;
         int direction, store;
 
-        if(withWalls)   {mStepsToFlush = mStepsToFlush * 10;}
         for (int move = 1; move <= mStepsToFlush; move++) {
             moved = false;
             // random direction
