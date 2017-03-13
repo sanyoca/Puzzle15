@@ -72,7 +72,12 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.withwalls);
+        setContentView(R.layout.playboard);
+        View vHorizontal = findViewById(R.id.horizontalline);
+        vHorizontal.setVisibility(View.VISIBLE);
+        View vVertical = findViewById(R.id.verticalline);
+        vVertical.setVisibility(View.VISIBLE);
+
         // no lolligaggin with the screen !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
