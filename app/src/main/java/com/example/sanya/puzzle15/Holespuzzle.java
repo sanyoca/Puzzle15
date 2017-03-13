@@ -173,6 +173,7 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
             // now, if possible, swap the tile with the empty spot
 
             if (table.moveIfCan(col, row)) {
+/*
                 int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
                         AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
@@ -190,6 +191,7 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
                     // media player once the sound has finished playing.
                     mMediaPlayer.setOnCompletionListener(mCompletionListener);
                 }
+*/
             }
 
             // show the rearranged table

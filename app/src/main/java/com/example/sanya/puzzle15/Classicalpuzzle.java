@@ -169,6 +169,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
             // now, if possible, swap the tile with the empty spot and play the click sound
 
             if (table.moveIfCan(col, row)) {
+/*
                 int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
                         AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
@@ -186,6 +187,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
                     // media player once the sound has finished playing.
                     mMediaPlayer.setOnCompletionListener(mCompletionListener);
                 }
+*/
             }
 
             // show the rearranged table

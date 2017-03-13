@@ -6,13 +6,19 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class Picturepuzzle extends AppCompatActivity implements View.OnClickListener {
+/**
+ * Created by sanya on 2017.03.13..
+ */
+
+public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
     Gameboard table;
-    private int[] intImageResources = {0, R.drawable.horse_1, R.drawable.horse_2, R.drawable.horse_3, R.drawable.horse_4, R.drawable.horse_5, R.drawable.horse_6, R.drawable.horse_7, R.drawable.horse_8, R.drawable.horse_9, R.drawable.horse_10, R.drawable.horse_11, R.drawable.horse_12, R.drawable.horse_13, R.drawable.horse_14, R.drawable.horse_15, R.drawable.horse_16};
+    private int[] intImageResources = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
+
     /**
      * Handles playback of all the sound files
      */
@@ -65,11 +71,11 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.playboard);
-        // still no lolligaggin with the orientation !!!
+        setContentView(R.layout.withwalls);
+        // no lolligaggin with the screen !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        table = new Gameboard(Gameboard.NORMAL);
+        table = new Gameboard(Gameboard.WALLS);
         // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
         findViewById(R.id.button10).setOnClickListener(this);
         findViewById(R.id.button30).setOnClickListener(this);
@@ -94,22 +100,20 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         rowLayout = (LinearLayout) findViewById(R.id.row4);
         rowLayout.removeAllViewsInLayout();
 
-        for (row = 1; row <= 4; row++) {
-            for (col = 1; col <= 4; col++) {
-
-
-                ImageView newTile = new ImageView(Picturepuzzle.this);
+        for (row = 1; row <= 7; row+=2) {
+            for (col = 1; col <= 7; col+=2) {
+                ImageView newTile = new ImageView(Wallspuzzle.this);
                 switch (row) {
                     case 1:
                         rowLayout = (LinearLayout) findViewById(R.id.row1);
                         break;
-                    case 2:
+                    case 3:
                         rowLayout = (LinearLayout) findViewById(R.id.row2);
                         break;
-                    case 3:
+                    case 5:
                         rowLayout = (LinearLayout) findViewById(R.id.row3);
                         break;
-                    case 4:
+                    case 7:
                         rowLayout = (LinearLayout) findViewById(R.id.row4);
                         break;
                     default:
@@ -127,7 +131,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
             }
         }
         if (table.isGameWon()) {
-            Toast.makeText(Picturepuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
+            Toast.makeText(Wallspuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -152,22 +156,22 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
             }
 
             // where is the clicked tile in the matrix?
-            while (row < 5 && !gotCha) {
-                while (col < 5 && !gotCha) {
+            while (row < 8 && !gotCha) {
+                while (col < 8 && !gotCha) {
                     if (table.getBoardValue(col, row) == tileNumber) {
                         gotCha = true;
                     }
-                    col++;
+                    col+=2;
                 }
-                row++;
+                row+=2;
                 if (!gotCha) col = 1;
             }
 
-            col--;
-            row--;
+            col-=2;
+            row-=2;
 
             // col, row position shows to the clicked tile's position
-            // now, if possible, swap the tile with the empty spot
+            // now, if possible, swap the tile with the empty spot and play the click sound
 
             if (table.moveIfCan(col, row)) {
 /*
@@ -179,7 +183,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
 
                     // Create and setup the {@link MediaPlayer} for the audio resource associated
                     // with the current word
-                    mMediaPlayer = MediaPlayer.create(Picturepuzzle.this, R.raw.click);
+                    mMediaPlayer = MediaPlayer.create(Wallspuzzle.this, R.raw.click);
 
                     // Start the audio file
                     mMediaPlayer.start();
@@ -191,25 +195,28 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
 */
             }
 
-
             // show the rearranged table
             showTable();
             // not a tile was clicked, but a radiobutton or the flush button
         } else {
             switch (pushedView) {
                 case 100: {
+                    // set the flush steps to 10
                     table.setFlushStep(10);
                     break;
                 }
                 case 300: {
+                    // set the flush steps to 30
                     table.setFlushStep(30);
                     break;
                 }
                 case 500: {
+                    // set the flush steps to 50
                     table.setFlushStep(50);
                     break;
                 }
                 case 700: {
+                    // the flush button
                     // reset the table
                     table.resetTable();
                     // shuffle the tiles
