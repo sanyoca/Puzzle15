@@ -31,6 +31,11 @@
         android:id="@+id/row4"
         style="@style/rowlayouts"></LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/helper"></RelativeLayout>
+
     <View
         android:layout_width="5dp"
         android:id="@+id/verticalline"

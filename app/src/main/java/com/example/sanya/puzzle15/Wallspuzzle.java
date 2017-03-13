@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 /**
@@ -80,11 +81,12 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
         b300.setText(R.string.steps300);
         Button b500 = (Button) findViewById(R.id.button50);
         b500.setText(R.string.steps500);
-
+/*
         View vHorizontal = findViewById(R.id.horizontalline);
         vHorizontal.setVisibility(View.VISIBLE);
         View vVertical = findViewById(R.id.verticalline);
         vVertical.setVisibility(View.VISIBLE);
+*/
         // no lolligaggin with the screen !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -116,6 +118,9 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
         rowLayout.removeAllViewsInLayout();
         rowLayout = (LinearLayout) findViewById(R.id.row4);
         rowLayout.removeAllViewsInLayout();
+        RelativeLayout helperLayout = (RelativeLayout) findViewById((R.id.helper));
+        int leftMargin, topMargin;
+        View line;
 
         for (row = 1; row <= 7; row+=2) {
             for (col = 1; col <= 7; col+=2) {
@@ -139,12 +144,33 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
                 String e = String.valueOf(table.getBoardValue(col, row));
                 newTile.setPadding(3, 3, 3, 3);
                 newTile.setImageResource(intImageResources[Integer.valueOf(e)]);
-                LinearLayout ll = new LinearLayout(this);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(110, 110);
                 newTile.setLayoutParams(layoutParams);
                 newTile.setTag(String.valueOf(e));
                 newTile.setOnClickListener(this);
                 rowLayout.addView(newTile);
+                if(table.getBoardValue(col+1, row) == 999)  {
+                    leftMargin = (col*110) - 64 - ((col+1)*6);
+                    topMargin = ((row/2)*110);
+                    line = new View(Wallspuzzle.this);
+                    line.setBackgroundColor(0xffff0000);
+                    RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(5, 116);
+                    rlp.setMargins(leftMargin, topMargin, 3, 3);
+                    line.setLayoutParams(rlp);
+                    helperLayout.addView(line);
+                }
+
+                if(table.getBoardValue(col, row+1) == 999)  {
+                    leftMargin = ((col-1)*110)-64-((col+1)*6);
+                    topMargin = (((row/2)+1)*110) - 3;
+                    line = new View(Wallspuzzle.this);
+                    line.setBackgroundColor(0xffff0000);
+                    RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(116, 5);
+                    rlp.setMargins(leftMargin, topMargin, 3, 3);
+                    line.setLayoutParams(rlp);
+                    helperLayout.addView(line);
+                }
+
             }
         }
         if (table.isGameWon()) {
