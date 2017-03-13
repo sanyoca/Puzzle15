@@ -1,5 +1,6 @@
 package com.example.sanya.puzzle15;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -74,6 +75,9 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
         setContentView(R.layout.withwalls);
         // no lolligaggin with the screen !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        // Create and setup the {@link AudioManager} to request audio focus
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         table = new Gameboard(Gameboard.WALLS);
         // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
@@ -174,7 +178,7 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
             // now, if possible, swap the tile with the empty spot and play the click sound
 
             if (table.moveIfCan(col, row)) {
-/*
+
                 int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
                         AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
@@ -192,7 +196,6 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
                     // media player once the sound has finished playing.
                     mMediaPlayer.setOnCompletionListener(mCompletionListener);
                 }
-*/
             }
 
             // show the rearranged table
