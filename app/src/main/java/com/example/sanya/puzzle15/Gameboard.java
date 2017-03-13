@@ -98,6 +98,7 @@ public class Gameboard extends AppCompatActivity {
                     count++;
                 }
             }
+            // 999 marks the places where there are walls
             mPlayField[4][3] = 999;
             mPlayField[4][4] = 999;
             mPlayField[4][5] = 999;
@@ -247,6 +248,7 @@ public class Gameboard extends AppCompatActivity {
     public boolean isGameWon() {
         int col, row;
         int counter = 0;
+        int needed = 1;
 
         if(!withWalls) {
             for (row = 1; row <= 4; row++) {
@@ -257,8 +259,16 @@ public class Gameboard extends AppCompatActivity {
                 }
             }
             return ((counter == 15 && inGame) || (counter == 14 && inGame && withHoles));
-        }   else    {
-            return false;
+        }   else {
+            for (row = 1; row <= 7; row += 2) {
+                for (col = 1; col <= 7; col += 2) {
+                    if (getBoardValue(col, row) == needed) {
+                        counter++;
+                        needed++;
+                    }
+                }
+            }
+            return (counter == 15 && inGame);
         }
     }
 
