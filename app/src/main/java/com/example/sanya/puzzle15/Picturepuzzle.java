@@ -151,10 +151,10 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
                         rowLayout = (LinearLayout) findViewById(R.id.row4);
                 }
                 String e = String.valueOf(table.getBoardValue(col, row));
-                newTile.setPadding(3, 3, 3, 3);
+                newTile.setPadding(pxToDp(6),pxToDp(6), pxToDp(6), pxToDp(6));
                 newTile.setImageResource(intImageResources[whichImage][Integer.valueOf(e)]);
                 LinearLayout ll = new LinearLayout(this);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(110, 110);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(pxToDp(160), pxToDp(160));
                 newTile.setLayoutParams(layoutParams);
                 newTile.setTag(String.valueOf(e));
                 newTile.setOnClickListener(this);
@@ -287,4 +287,10 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
             mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
         }
     }
+
+    public int pxToDp(int px) {
+        float scale = getResources().getDisplayMetrics().density;
+        return (int) ((px/scale)+0.5f);
+    }
+
 }

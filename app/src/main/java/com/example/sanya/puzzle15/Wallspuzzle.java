@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by sanya on 2017.03.13..
@@ -142,35 +145,35 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
                         rowLayout = (LinearLayout) findViewById(R.id.row4);
                 }
                 String e = String.valueOf(table.getBoardValue(col, row));
-                newTile.setPadding(3, 3, 3, 3);
+                newTile.setPadding(pxToDp(6),pxToDp(6), pxToDp(6), pxToDp(6));
                 newTile.setImageResource(intImageResources[Integer.valueOf(e)]);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(110, 110);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(pxToDp(160), pxToDp(160));
                 newTile.setLayoutParams(layoutParams);
                 newTile.setTag(String.valueOf(e));
                 newTile.setOnClickListener(this);
                 rowLayout.addView(newTile);
+
                 if(table.getBoardValue(col+1, row) == 999)  {
-                    leftMargin = (col*110) - 64 - ((col+1)*6);
-                    topMargin = ((row/2)*110);
+                    leftMargin = pxToDp(((col+1)/2)*180);
+                    topMargin = pxToDp(((row)/2)*170-(row/2)*6);
                     line = new View(Wallspuzzle.this);
                     line.setBackgroundColor(0xffff0000);
-                    RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(5, 116);
-                    rlp.setMargins(leftMargin, topMargin, 3, 3);
+                    RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(pxToDp(20), pxToDp(150));
+                    rlp.setMargins(leftMargin, topMargin, 0, 0);
                     line.setLayoutParams(rlp);
                     helperLayout.addView(line);
                 }
 
                 if(table.getBoardValue(col, row+1) == 999)  {
-                    leftMargin = ((col-1)*110)-64-((col+1)*6);
-                    topMargin = (((row/2)+1)*110) - 3;
+                    leftMargin = pxToDp((col/2)*180);
+                    topMargin = pxToDp((row-1)*160 + col*6);
                     line = new View(Wallspuzzle.this);
                     line.setBackgroundColor(0xffff0000);
-                    RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(116, 5);
+                    RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(pxToDp(150), pxToDp(20));
                     rlp.setMargins(leftMargin, topMargin, 3, 3);
                     line.setLayoutParams(rlp);
                     helperLayout.addView(line);
                 }
-
             }
         }
         if (table.isGameWon()) {
@@ -301,5 +304,10 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
             // unregisters the AudioFocusChangeListener so we don't get anymore callbacks.
             mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
         }
+    }
+
+    public int pxToDp(int px) {
+        float scale = getResources().getDisplayMetrics().density;
+        return (int) ((px/scale)+0.5f);
     }
 }
