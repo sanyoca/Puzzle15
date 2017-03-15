@@ -124,7 +124,7 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
         RelativeLayout helperLayout = (RelativeLayout) findViewById((R.id.helper));
         int leftMargin, topMargin;
         View line;
-
+        helperLayout.removeAllViewsInLayout();
         for (row = 1; row <= 7; row+=2) {
             for (col = 1; col <= 7; col+=2) {
                 ImageView newTile = new ImageView(Wallspuzzle.this);
@@ -154,11 +154,11 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
                 rowLayout.addView(newTile);
 
                 if(table.getBoardValue(col+1, row) == 999)  {
-                    leftMargin = pxToDp(((col+1)/2)*180);
+                    leftMargin = pxToDp(10+((col+1)/2)*172);
                     topMargin = pxToDp(((row)/2)*170-(row/2)*6);
                     line = new View(Wallspuzzle.this);
                     line.setBackgroundColor(0xffff0000);
-                    RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(pxToDp(20), pxToDp(150));
+                    RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(pxToDp(20), pxToDp(160));
                     rlp.setMargins(leftMargin, topMargin, 0, 0);
                     line.setLayoutParams(rlp);
                     helperLayout.addView(line);
