@@ -100,10 +100,10 @@ public class Gameboard extends AppCompatActivity {
             }
             // 999 marks the places where there are walls
             mPlayField[2][1] = 999;
-            mPlayField[4][4] = 999;
-            mPlayField[4][5] = 999;
-            mPlayField[3][4] = 999;
+            mPlayField[3][2] = 999;
+            mPlayField[4][3] = 999;
             mPlayField[5][4] = 999;
+            mPlayField[6][5] = 999;
 
             mPlayField[7][7] = 0;
             mEmptySpotRow = 7;

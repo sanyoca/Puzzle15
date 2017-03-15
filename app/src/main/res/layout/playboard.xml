@@ -36,26 +36,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/helper"></RelativeLayout>
 
-    <View
-        android:layout_width="5dp"
-        android:id="@+id/verticalline"
-        android:visibility="gone"
-        android:layout_height="140dp"
-        android:layout_marginLeft="160dp"
-        android:layout_marginTop="78dp"
-        android:background="@android:color/holo_red_dark">
-    </View>
-
-    <View
-        android:visibility="gone"
-        android:layout_width="140dp"
-        android:id="@+id/horizontalline"
-        android:layout_height="5dp"
-        android:layout_marginLeft="94dp"
-        android:layout_marginTop="142dp"
-        android:background="@android:color/holo_red_dark">
-    </View>
-
     <LinearLayout
         android:layout_below="@id/row4"
         android:layout_width="match_parent"
