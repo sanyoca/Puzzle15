@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.button_startpicture).setOnClickListener(this);
         findViewById(R.id.button_startholes).setOnClickListener(this);
         findViewById(R.id.button_quitgame).setOnClickListener(this);
-        findViewById(R.id.button_startwalls).setOnClickListener(this);
+        // findViewById(R.id.button_startwalls).setOnClickListener(this);
+        findViewById(R.id.button_highscores).setOnClickListener(this);
         findViewById(R.id.button_rules).setOnClickListener(this);
     }
 
@@ -62,6 +63,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // starts the walls version game
             case R.id.button_startwalls: {
                 intentStart = new Intent(MainActivity.this, Wallspuzzle.class);
+                startActivity(intentStart);
+                break;
+            }
+
+            // shows the high scores
+            case R.id.button_highscores: {
+                intentStart = new Intent(MainActivity.this, Highscores.class);
                 startActivity(intentStart);
                 break;
             }

@@ -37,6 +37,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".Highscores"
+            android:label="High scores"
+            android:theme="@style/subTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
         <activity android:name=".Wallspuzzle"
             android:label="15 puzzle with walls"
             android:theme="@style/subTheme">

@@ -9,10 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Holespuzzle extends AppCompatActivity implements View.OnClickListener {
     Gameboard table;
+    int moves = 0;
     private int[] intImageResources = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
     /**
      * Handles playback of all the sound files
@@ -75,9 +77,9 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
 
         table = new Gameboard(Gameboard.HOLE);
         // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
-        findViewById(R.id.button10).setOnClickListener(this);
         findViewById(R.id.button30).setOnClickListener(this);
         findViewById(R.id.button50).setOnClickListener(this);
+        findViewById(R.id.button100).setOnClickListener(this);
         findViewById(R.id.shufflebutton).setOnClickListener(this);
         showTable();
     }
@@ -194,26 +196,29 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
                     // media player once the sound has finished playing.
                     mMediaPlayer.setOnCompletionListener(mCompletionListener);
                 }
+                // show the rearranged table
+                showTable();
+                moves ++;
+                TextView movesText = (TextView) findViewById(R.id.moves_textview);
+                movesText.setText(": "+moves+String.valueOf(moves));
             }
 
-            // show the rearranged table
-            showTable();
             // not a tile was clicked, but a radiobutton or the flush button
         } else {
             switch (pushedView) {
-                case 100: {
-                    // set the flush steps to 10
-                    table.setFlushStep(10);
-                    break;
-                }
-                case 300: {
+                case 30: {
                     // set the flush steps to 30
                     table.setFlushStep(30);
                     break;
                 }
-                case 500: {
+                case 50: {
                     // set the flush steps to 50
                     table.setFlushStep(50);
+                    break;
+                }
+                case 100: {
+                    // set the flush steps to 100
+                    table.setFlushStep(100);
                     break;
                 }
                 case 700: {

@@ -12,10 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Picturepuzzle extends AppCompatActivity implements View.OnClickListener {
     Gameboard table;
+    int moves = 0;
     private int whichImage = 0;
     private int[][] intImageResources = {{0, R.drawable.horse_1, R.drawable.horse_2, R.drawable.horse_3, R.drawable.horse_4, R.drawable.horse_5, R.drawable.horse_6, R.drawable.horse_7, R.drawable.horse_8, R.drawable.horse_9, R.drawable.horse_10, R.drawable.horse_11, R.drawable.horse_12, R.drawable.horse_13, R.drawable.horse_14, R.drawable.horse_15, R.drawable.horse_16},{0, R.drawable.thor_1, R.drawable.thor_2, R.drawable.thor_3, R.drawable.thor_4, R.drawable.thor_5, R.drawable.thor_6, R.drawable.thor_7, R.drawable.thor_8, R.drawable.thor_9, R.drawable.thor_10, R.drawable.thor_11, R.drawable.thor_12, R.drawable.thor_13, R.drawable.thor_14, R.drawable.thor_15, R.drawable.thor_16}};
 
@@ -74,7 +76,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.playboard);
         Spinner pictureChooser = (Spinner)findViewById(R.id.spinner1);
         String[] items = new String[]{"Horse", "Thor"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         pictureChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -106,9 +108,9 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
 
         table = new Gameboard(Gameboard.NORMAL);
         // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
-        findViewById(R.id.button10).setOnClickListener(this);
         findViewById(R.id.button30).setOnClickListener(this);
-        findViewById(R.id.button50).setOnClickListener(this);
+        findViewById(R.id.button30).setOnClickListener(this);
+        findViewById(R.id.button100).setOnClickListener(this);
         findViewById(R.id.shufflebutton).setOnClickListener(this);
         showTable();
     }
@@ -223,24 +225,29 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
                     // media player once the sound has finished playing.
                     mMediaPlayer.setOnCompletionListener(mCompletionListener);
                 }
+                // show the rearranged table
+                showTable();
+                moves ++;
+                TextView movesText = (TextView) findViewById(R.id.moves_textview);
+                movesText.setText(": "+String.valueOf(moves));
             }
 
-
-            // show the rearranged table
-            showTable();
             // not a tile was clicked, but a radiobutton or the flush button
         } else {
             switch (pushedView) {
-                case 100: {
-                    table.setFlushStep(10);
-                    break;
-                }
-                case 300: {
+                // set the flush steps to 30
+                case 30: {
                     table.setFlushStep(30);
                     break;
                 }
-                case 500: {
+                // set the flush steps to 50
+                case 50: {
                     table.setFlushStep(50);
+                    break;
+                }
+                // set the flush steps to 100
+                case 100: {
+                    table.setFlushStep(100);
                     break;
                 }
                 case 700: {

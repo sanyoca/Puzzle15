@@ -39,7 +39,14 @@
         <Button
             android:id="@+id/button_startwalls"
             style="@style/gamebuttons"
-            android:text="@string/classicalwithwalls" />
+            android:text="@string/classicalwithwalls"
+            android:clickable="false"
+            android:enabled="false"/>
+
+        <Button
+            android:id="@+id/button_highscores"
+            style="@style/gamebuttons"
+            android:text="@string/highscores" />
 
         <Button
             android:id="@+id/button_rules"

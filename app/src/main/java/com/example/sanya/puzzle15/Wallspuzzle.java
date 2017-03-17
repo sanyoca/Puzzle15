@@ -6,7 +6,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,8 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by sanya on 2017.03.13..
@@ -78,11 +75,11 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playboard);
-        Button b100 = (Button) findViewById(R.id.button10);
+        Button b100 = (Button) findViewById(R.id.button30);
         b100.setText(R.string.steps100);
-        Button b300 = (Button) findViewById(R.id.button30);
+        Button b300 = (Button) findViewById(R.id.button50);
         b300.setText(R.string.steps300);
-        Button b500 = (Button) findViewById(R.id.button50);
+        Button b500 = (Button) findViewById(R.id.button100);
         b500.setText(R.string.steps500);
 /*
         View vHorizontal = findViewById(R.id.horizontalline);
@@ -98,9 +95,9 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
 
         table = new Gameboard(Gameboard.WALLS);
         // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
-        findViewById(R.id.button10).setOnClickListener(this);
         findViewById(R.id.button30).setOnClickListener(this);
         findViewById(R.id.button50).setOnClickListener(this);
+        findViewById(R.id.button100).setOnClickListener(this);
         findViewById(R.id.shufflebutton).setOnClickListener(this);
         showTable();
     }
@@ -121,10 +118,10 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
         rowLayout.removeAllViewsInLayout();
         rowLayout = (LinearLayout) findViewById(R.id.row4);
         rowLayout.removeAllViewsInLayout();
-        RelativeLayout helperLayout = (RelativeLayout) findViewById((R.id.helper));
+
         int leftMargin, topMargin;
         View line;
-        helperLayout.removeAllViewsInLayout();
+
         for (row = 1; row <= 7; row+=2) {
             for (col = 1; col <= 7; col+=2) {
                 ImageView newTile = new ImageView(Wallspuzzle.this);
@@ -161,7 +158,7 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
                     RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(pxToDp(20), pxToDp(160));
                     rlp.setMargins(leftMargin, topMargin, 0, 0);
                     line.setLayoutParams(rlp);
-                    helperLayout.addView(line);
+
                 }
 
                 if(table.getBoardValue(col, row+1) == 999)  {
@@ -172,7 +169,7 @@ public class Wallspuzzle extends AppCompatActivity implements OnClickListener {
                     RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(pxToDp(150), pxToDp(20));
                     rlp.setMargins(leftMargin, topMargin, 3, 3);
                     line.setLayoutParams(rlp);
-                    helperLayout.addView(line);
+
                 }
             }
         }
