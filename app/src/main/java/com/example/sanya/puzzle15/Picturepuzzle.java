@@ -295,6 +295,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    // converts px values to dp
     public int pxToDp(int px) {
         float scale = getResources().getDisplayMetrics().density;
         return (int) ((px/scale)+0.5f);
