@@ -11,7 +11,7 @@
         android:text="Top 5 moves"/>
 
     <LinearLayout
-        android:id="@+id/top5moves"
+        android:id="@+id/top5moveslayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -25,7 +25,7 @@
         android:text="Top 5 times"/>
 
     <LinearLayout
-        android:id="@+id/top5times"
+        android:id="@+id/top5timeslayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
