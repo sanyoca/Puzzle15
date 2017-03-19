@@ -200,7 +200,7 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
                 showTable();
                 moves ++;
                 TextView movesText = (TextView) findViewById(R.id.moves_textview);
-                movesText.setText(": "+moves+String.valueOf(moves));
+                movesText.setText(": "+String.valueOf(moves));
             }
 
             // not a tile was clicked, but a radiobutton or the flush button

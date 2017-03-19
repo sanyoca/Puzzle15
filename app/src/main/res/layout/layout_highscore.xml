@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/titletop5moves"
+        style="@style/toptitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Top 5 moves"/>
+
+    <LinearLayout
+        android:id="@+id/top5moves"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/titletop5times"
+        style="@style/toptitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Top 5 times"/>
+
+    <LinearLayout
+        android:id="@+id/top5times"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </LinearLayout>
+
+
+</LinearLayout>
