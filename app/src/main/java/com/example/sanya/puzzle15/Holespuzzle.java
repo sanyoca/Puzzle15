@@ -75,7 +75,7 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
         // Create and setup the {@link AudioManager} to request audio focus
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-        table = new Gameboard(Gameboard.HOLE);
+        table = new Gameboard(this, Gameboard.HOLE);
         // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
         findViewById(R.id.button30).setOnClickListener(this);
         findViewById(R.id.button50).setOnClickListener(this);

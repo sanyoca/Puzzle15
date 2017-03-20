@@ -76,7 +76,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
         // Create and setup the {@link AudioManager} to request audio focus
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-        table = new Gameboard(Gameboard.NORMAL);
+        table = new Gameboard(this, Gameboard.NORMAL);
         // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
         findViewById(R.id.button30).setOnClickListener(this);
         findViewById(R.id.button50).setOnClickListener(this);
@@ -133,6 +133,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
         }
         if (table.isGameWon()) {
             Toast.makeText(Classicalpuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
+            table.storeScore(table.NORMAL, moves);
         }
     }
 
@@ -205,7 +206,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
             switch (pushedView) {
                 case 30: {
                     // set the flush steps to 30
-                    table.setFlushStep(30);
+                    table.setFlushStep(10);
                     break;
                 }
                 case 50: {

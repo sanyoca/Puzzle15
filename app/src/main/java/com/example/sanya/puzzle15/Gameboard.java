@@ -1,6 +1,10 @@
 package com.example.sanya.puzzle15;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
+
+import java.util.Arrays;
 
 public class Gameboard extends AppCompatActivity {
     private int[][] mPlayField = new int[9][9];
@@ -11,13 +15,21 @@ public class Gameboard extends AppCompatActivity {
     private int intHoleCol, intHoleRow;
     private boolean withHoles = false, withWalls = false;
     static final int NORMAL = 1;
-    static final int HOLE = 2;
-    static final int WALLS = 3;
+    static final int PICTURE = 2;
+    static final int HOLE = 3;
+    static final int WALLS = 4;
+    Context mContext;
 
-    public Gameboard(int kindOfGame) {
+    public Gameboard(Context context, int kindOfGame) {
+        mContext = context;
         switch(kindOfGame)  {
             // normal game
             case NORMAL: {
+                maxRowCol = 4;
+                break;
+            }
+            // picture game
+            case PICTURE: {
                 maxRowCol = 4;
                 break;
             }
@@ -350,5 +362,93 @@ public class Gameboard extends AppCompatActivity {
      */
     public boolean isThisHole(int intHoleCol, int intHoleRow)  {
         return (mPlayField[intHoleCol][intHoleRow] == -1);
+    }
+
+    /**
+     * @param gameKind what kind og puzzle we play (CLASSIC, PICTURE, HOLE)
+     * @param moves how many steps were used to solve the puzzle
+     *
+     * this method does a lot of things:
+     *              1. creates sharedpreferences for each of the puzzle types
+     *              2. if there is a corresponding data, it reads it, then writes back
+     */
+
+    public void storeScore(int gameKind, int moves) {
+        SharedPreferences highscoreSaves = mContext.getSharedPreferences("classichighscore30", MODE_PRIVATE);
+        int[] scores = {0, 0, 0, 0, 0, 0};
+/*
+        switch (gameKind) {
+            case NORMAL:
+                switch (mStepsToFlush) {
+                    case 10:
+                        highscoreSaves = getSharedPreferences("classichighscore30", MODE_PRIVATE);
+                        break;
+                    case 50:
+                        highscoreSaves = getSharedPreferences("classichighscore50", 0);
+                        break;
+                    case 100:
+                        highscoreSaves = getSharedPreferences("classichighscore100", 0);
+                        break;
+                }
+                break;
+            case PICTURE:
+                switch (mStepsToFlush) {
+                    case 30:
+                        highscoreSaves = getSharedPreferences("picturehighscore30", 0);
+                        break;
+                    case 50:
+                        highscoreSaves = getSharedPreferences("picturehighscore50", 0);
+                        break;
+                    case 100:
+                        highscoreSaves = getSharedPreferences("picturehighscore100", 0);
+                        break;
+                }
+                break;
+            case HOLE:
+                switch (mStepsToFlush) {
+                    case 30:
+                        highscoreSaves = getSharedPreferences("holehighscore30", 0);
+                        break;
+                    case 50:
+                        highscoreSaves = getSharedPreferences("holehighscore50", 0);
+                        break;
+                    case 100:
+                        highscoreSaves = getSharedPreferences("holehighscore100", 0);
+                        break;
+                }
+                break;
+            case WALLS:
+                highscoreSaves = getSharedPreferences("wallshighscore", 0);
+                break;
+            default:
+                break;
+        }
+*/
+
+        SharedPreferences.Editor editSaveScores = highscoreSaves.edit();
+        String workWithString = "";
+        int startHere = 0;
+        int i = 1;
+        boolean notFound = true;
+
+        while(i <= 6 && notFound)   {
+            workWithString = "scores["+String.valueOf(i-1)+"]";
+            scores[i-1]=highscoreSaves.getInt(workWithString, 0);
+            if(scores[i-1] == 0)    {
+                startHere = i-1;
+                notFound = false;
+            }
+            i++;
+        }
+
+        scores[startHere] = moves;
+        Arrays.sort(scores);
+
+        for(i = 1; i<= 5; i++)  {
+            workWithString = "scores["+String.valueOf(i-1)+"]";
+            editSaveScores.putInt(workWithString, scores[i-1]);
+        }
+
+        editSaveScores.apply();
     }
 }

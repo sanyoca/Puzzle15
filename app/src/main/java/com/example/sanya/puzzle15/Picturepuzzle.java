@@ -106,7 +106,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         // Create and setup the {@link AudioManager} to request audio focus
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-        table = new Gameboard(Gameboard.NORMAL);
+        table = new Gameboard(this, Gameboard.NORMAL);
         // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
         findViewById(R.id.button30).setOnClickListener(this);
         findViewById(R.id.button30).setOnClickListener(this);
