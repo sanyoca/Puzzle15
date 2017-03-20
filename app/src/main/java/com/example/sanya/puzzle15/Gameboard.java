@@ -374,81 +374,71 @@ public class Gameboard extends AppCompatActivity {
      */
 
     public void storeScore(int gameKind, int moves) {
-        SharedPreferences highscoreSaves = mContext.getSharedPreferences("classichighscore30", MODE_PRIVATE);
-        int[] scores = {0, 0, 0, 0, 0, 0};
-/*
+        SharedPreferences highscoreSaves = null;
+
         switch (gameKind) {
             case NORMAL:
                 switch (mStepsToFlush) {
-                    case 10:
-                        highscoreSaves = getSharedPreferences("classichighscore30", MODE_PRIVATE);
+                    case 30:
+                        highscoreSaves = mContext.getSharedPreferences("classichighscore30", MODE_PRIVATE);
                         break;
                     case 50:
-                        highscoreSaves = getSharedPreferences("classichighscore50", 0);
+                        highscoreSaves = mContext.getSharedPreferences("classichighscore50", MODE_PRIVATE);
                         break;
                     case 100:
-                        highscoreSaves = getSharedPreferences("classichighscore100", 0);
+                        highscoreSaves = mContext.getSharedPreferences("classichighscore100", MODE_PRIVATE);
                         break;
                 }
                 break;
             case PICTURE:
                 switch (mStepsToFlush) {
                     case 30:
-                        highscoreSaves = getSharedPreferences("picturehighscore30", 0);
+                        highscoreSaves = mContext.getSharedPreferences("picturehighscore30", MODE_PRIVATE);
                         break;
                     case 50:
-                        highscoreSaves = getSharedPreferences("picturehighscore50", 0);
+                        highscoreSaves = mContext.getSharedPreferences("picturehighscore50", MODE_PRIVATE);
                         break;
                     case 100:
-                        highscoreSaves = getSharedPreferences("picturehighscore100", 0);
+                        highscoreSaves = mContext.getSharedPreferences("picturehighscore100", MODE_PRIVATE);
                         break;
                 }
                 break;
             case HOLE:
                 switch (mStepsToFlush) {
                     case 30:
-                        highscoreSaves = getSharedPreferences("holehighscore30", 0);
+                        highscoreSaves = mContext.getSharedPreferences("holehighscore30", MODE_PRIVATE);
                         break;
                     case 50:
-                        highscoreSaves = getSharedPreferences("holehighscore50", 0);
+                        highscoreSaves = mContext.getSharedPreferences("holehighscore50", MODE_PRIVATE);
                         break;
                     case 100:
-                        highscoreSaves = getSharedPreferences("holehighscore100", 0);
+                        highscoreSaves = mContext.getSharedPreferences("holehighscore100", MODE_PRIVATE);
                         break;
                 }
                 break;
             case WALLS:
-                highscoreSaves = getSharedPreferences("wallshighscore", 0);
+                highscoreSaves = mContext.getSharedPreferences("wallshighscore", MODE_PRIVATE);
                 break;
             default:
                 break;
         }
-*/
 
         SharedPreferences.Editor editSaveScores = highscoreSaves.edit();
-        String workWithString = "";
-        int startHere = 0;
-        int i = 1;
-        boolean notFound = true;
 
-        while(i <= 6 && notFound)   {
-            workWithString = "scores["+String.valueOf(i-1)+"]";
-            scores[i-1]=highscoreSaves.getInt(workWithString, 0);
-            if(scores[i-1] == 0)    {
-                startHere = i-1;
-                notFound = false;
-            }
-            i++;
-        }
+        int [] bestMoves = {0, 0, 0, 0, 0, 0};
+        bestMoves[0] = highscoreSaves.getInt("best1move", 1000000);
+        bestMoves[1] = highscoreSaves.getInt("best2move", 1000000);
+        bestMoves[2] = highscoreSaves.getInt("best3move", 1000000);
+        bestMoves[3] = highscoreSaves.getInt("best4move", 1000000);
+        bestMoves[4] = highscoreSaves.getInt("best5move", 1000000);
+        bestMoves[5] = moves;
+        Arrays.sort(bestMoves);
 
-        scores[startHere] = moves;
-        Arrays.sort(scores);
-
-        for(i = 1; i<= 5; i++)  {
-            workWithString = "scores["+String.valueOf(i-1)+"]";
-            editSaveScores.putInt(workWithString, scores[i-1]);
-        }
-
+        editSaveScores.putInt("best1move", bestMoves[0]);
+        editSaveScores.putInt("best2move", bestMoves[1]);
+        editSaveScores.putInt("best3move", bestMoves[2]);
+        editSaveScores.putInt("best4move", bestMoves[3]);
+        editSaveScores.putInt("best5move", bestMoves[4]);
         editSaveScores.apply();
     }
 }

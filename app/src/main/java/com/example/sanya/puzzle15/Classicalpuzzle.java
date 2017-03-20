@@ -206,7 +206,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
             switch (pushedView) {
                 case 30: {
                     // set the flush steps to 30
-                    table.setFlushStep(10);
+                    table.setFlushStep(30);
                     break;
                 }
                 case 50: {
@@ -223,6 +223,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
                     // the flush button
                     // reset the table
                     table.resetTable();
+                    moves = 0;
                     // shuffle the tiles
                     table.shuffleTable();
                     // show the table

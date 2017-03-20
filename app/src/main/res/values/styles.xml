@@ -35,6 +35,11 @@
         <item name="android:textSize">@dimen/toptitle_fontsize</item>
     </style>
 
+    <style name="subtitle" parent="gametitle">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:textSize">@dimen/subtitle_fontsize</item>
+    </style>
+
     <style name="gamebuttons">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

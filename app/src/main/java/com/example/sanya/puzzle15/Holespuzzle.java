@@ -136,6 +136,7 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
         }
         if (table.isGameWon()) {
             Toast.makeText(Holespuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
+            table.storeScore(Gameboard.HOLE, moves);
         }
     }
 
@@ -225,6 +226,7 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
                     // the flush button
                     // reset the table
                     table.resetTable();
+                    moves = 0;
                     // shuffle the tiles
                     table.shuffleTable();
                     // show the table

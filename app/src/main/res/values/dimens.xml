@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="gametitle_fontsize">45sp</dimen>
     <dimen name="toptitle_fontsize">25sp</dimen>
+    <dimen name="subtitle_fontsize">20sp</dimen>
 </resources>

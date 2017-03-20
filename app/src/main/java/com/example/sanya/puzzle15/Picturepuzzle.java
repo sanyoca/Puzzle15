@@ -165,6 +165,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         }
         if (table.isGameWon()) {
             Toast.makeText(Picturepuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
+            table.storeScore(Gameboard.PICTURE, moves);
         }
     }
 
@@ -253,6 +254,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
                 case 700: {
                     // reset the table
                     table.resetTable();
+                    moves = 0;
                     // shuffle the tiles
                     table.shuffleTable();
                     // show the table
