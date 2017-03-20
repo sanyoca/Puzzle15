@@ -36,8 +36,9 @@ public class HighscoreClassic extends Fragment {
         String[] prefFiles = {"classichighscore30", "classichighscore50", "classichighscore100"};
         String[] bestMovesString = {"best1move", "best2move", "best3move", "best4move", "best5move"};
         int[] topMovesLayouts = {R.id.top5moves30layout, R.id.top5moves50layout, R.id.top5moves100layout};
-        int [] bestMoves = {0, 0, 0, 0, 0, 0};
+        int[] bestMoves = {0, 0, 0, 0, 0, 0};
         TextView insertThis;
+
         for(int i=0; i<=2; i++) {
             SharedPreferences highscoreSaves = getActivity().getSharedPreferences(prefFiles[i], MODE_PRIVATE);
             for(int j=0; j<=4; j++) {
