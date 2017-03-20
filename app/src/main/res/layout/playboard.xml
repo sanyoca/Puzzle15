@@ -40,6 +40,7 @@
                     android:id="@+id/button30"
                     style="@style/wrapped"
                     android:tag="30"
+                    android:checked="true"
                     android:text="@string/steps30" />
 
                 <RadioButton

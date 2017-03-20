@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Gameboard extends AppCompatActivity {
     private int[][] mPlayField = new int[9][9];
     private boolean inGame = false;
-    private int mStepsToFlush = 10;
+    private int mStepsToFlush = 30;
     private int mEmptySpotRow, mEmptySpotColoumn;
     private int maxRowCol;
     private int intHoleCol, intHoleRow;
