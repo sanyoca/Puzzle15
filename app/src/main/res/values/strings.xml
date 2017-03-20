@@ -7,6 +7,9 @@
     <string name="classicalwithwalls">Classical with walls</string>
     <string name="highscores">High scores</string>
     <string name="classicalwithholes">Classical with a hole</string>
+    <string name="tab_classical">Classical</string>
+    <string name="tab_picture">Picture</string>
+    <string name="tab_hole">Hole</string>
     <string name="about">About the game - Rules</string>
     <string name="quitgame">Quit game</string>
     <string name="steps30">30 steps</string>

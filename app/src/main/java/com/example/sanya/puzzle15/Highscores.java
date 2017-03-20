@@ -18,7 +18,7 @@ public class Highscores extends AppCompatActivity{
         setContentView(R.layout.highscores);
 
         ViewPager vP = (ViewPager) findViewById(R.id.viewpager);
-        HighscoreAdapter highscoreAdapter = new HighscoreAdapter(getSupportFragmentManager());
+        HighscoreAdapter highscoreAdapter = new HighscoreAdapter(this, getSupportFragmentManager());
         vP.setAdapter(highscoreAdapter);
 
         TabLayout tL = (TabLayout) findViewById(R.id.tabs);
