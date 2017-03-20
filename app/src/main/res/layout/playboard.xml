@@ -28,8 +28,7 @@
         android:id="@+id/row4"
         style="@style/rowlayouts"></LinearLayout>
 
-    <LinearLayout
-        style="@style/radionshuffle">
+    <LinearLayout style="@style/radionshuffle">
 
         <LinearLayout style="@style/wrapped">
 
@@ -39,20 +38,20 @@
 
                 <RadioButton
                     android:id="@+id/button30"
-                    android:tag="30"
                     style="@style/wrapped"
+                    android:tag="30"
                     android:text="@string/steps30" />
 
                 <RadioButton
                     android:id="@+id/button50"
-                    android:tag="50"
                     style="@style/wrapped"
+                    android:tag="50"
                     android:text="@string/steps50" />
 
                 <RadioButton
                     android:id="@+id/button100"
-                    android:tag="100"
                     style="@style/wrapped"
+                    android:tag="100"
                     android:text="@string/steps100" />
             </RadioGroup>
 
@@ -61,10 +60,11 @@
         <LinearLayout style="@style/ll_shufflebutton">
 
             <Spinner
-                android:visibility="gone"
                 android:id="@+id/spinner1"
                 style="@style/wrapped"
-                android:background="@android:drawable/btn_dropdown"                                                android:spinnerMode="dropdown" />
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/shufflebutton"
@@ -75,22 +75,24 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+    <LinearLayout style="@style/movesandtime">
 
         <TextView
             style="@style/wrapped"
-            android:text="@string/moves"/>
+            android:text="@string/moves" />
 
         <TextView
-            style="@style/wrapped"
             android:id="@+id/moves_textview"
-            android:text=": 0"/>
+            style="@style/wrapped"
+            android:text=": 0" />
 
+    </LinearLayout>
+
+    <LinearLayout style="@style/movesandtime">
+
+        <TextView
+            style="@style/wrapped"
+            android:text="00:00" />
     </LinearLayout>
 
 </LinearLayout>
