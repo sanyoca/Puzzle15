@@ -378,46 +378,16 @@ public class Gameboard extends AppCompatActivity {
 
         switch (gameKind) {
             case NORMAL:
-                switch (mStepsToFlush) {
-                    case 30:
-                        highscoreSaves = mContext.getSharedPreferences("classichighscore30", MODE_PRIVATE);
-                        break;
-                    case 50:
-                        highscoreSaves = mContext.getSharedPreferences("classichighscore50", MODE_PRIVATE);
-                        break;
-                    case 100:
-                        highscoreSaves = mContext.getSharedPreferences("classichighscore100", MODE_PRIVATE);
-                        break;
-                }
+                highscoreSaves = mContext.getSharedPreferences("classichighscore"+String.valueOf(mStepsToFlush), MODE_PRIVATE);
                 break;
             case PICTURE:
-                switch (mStepsToFlush) {
-                    case 30:
-                        highscoreSaves = mContext.getSharedPreferences("picturehighscore30", MODE_PRIVATE);
-                        break;
-                    case 50:
-                        highscoreSaves = mContext.getSharedPreferences("picturehighscore50", MODE_PRIVATE);
-                        break;
-                    case 100:
-                        highscoreSaves = mContext.getSharedPreferences("picturehighscore100", MODE_PRIVATE);
-                        break;
-                }
+                highscoreSaves = mContext.getSharedPreferences("picturehighscore"+String.valueOf(mStepsToFlush), MODE_PRIVATE);
                 break;
             case HOLE:
-                switch (mStepsToFlush) {
-                    case 30:
-                        highscoreSaves = mContext.getSharedPreferences("holehighscore30", MODE_PRIVATE);
-                        break;
-                    case 50:
-                        highscoreSaves = mContext.getSharedPreferences("holehighscore50", MODE_PRIVATE);
-                        break;
-                    case 100:
-                        highscoreSaves = mContext.getSharedPreferences("holehighscore100", MODE_PRIVATE);
-                        break;
-                }
+                highscoreSaves = mContext.getSharedPreferences("holehighscore"+String.valueOf(mStepsToFlush), MODE_PRIVATE);
                 break;
             case WALLS:
-                highscoreSaves = mContext.getSharedPreferences("wallshighscore", MODE_PRIVATE);
+                highscoreSaves = mContext.getSharedPreferences("wallshighscore"+String.valueOf(mStepsToFlush), MODE_PRIVATE);
                 break;
             default:
                 break;
