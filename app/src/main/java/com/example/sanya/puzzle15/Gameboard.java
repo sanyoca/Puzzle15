@@ -410,5 +410,7 @@ public class Gameboard extends AppCompatActivity {
         editSaveScores.putInt("best4move", bestMoves[3]);
         editSaveScores.putInt("best5move", bestMoves[4]);
         editSaveScores.apply();
+
+        inGame = false;
     }
 }
