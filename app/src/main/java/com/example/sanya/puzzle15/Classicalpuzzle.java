@@ -137,6 +137,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
         if (table.isGameWon()) {
             Toast.makeText(Classicalpuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
             table.storeScore(table.NORMAL, moves, timer.getText().toString());
+            timer.stop();
         }
     }
 

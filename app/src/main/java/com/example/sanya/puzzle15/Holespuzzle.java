@@ -139,7 +139,8 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
         }
         if (table.isGameWon()) {
             Toast.makeText(Holespuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
-            table.storeScore(table.NORMAL, moves, timer.getText().toString());
+            table.storeScore(table.HOLE, moves, timer.getText().toString());
+            timer.stop();
         }
     }
 

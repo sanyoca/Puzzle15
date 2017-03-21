@@ -112,7 +112,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         table = new Gameboard(this, Gameboard.NORMAL);
         // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
         findViewById(R.id.button30).setOnClickListener(this);
-        findViewById(R.id.button30).setOnClickListener(this);
+        findViewById(R.id.button50).setOnClickListener(this);
         findViewById(R.id.button100).setOnClickListener(this);
         findViewById(R.id.shufflebutton).setOnClickListener(this);
         showTable();
@@ -168,7 +168,8 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         }
         if (table.isGameWon()) {
             Toast.makeText(Picturepuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
-            table.storeScore(table.NORMAL, moves, timer.getText().toString());
+            table.storeScore(table.PICTURE, moves, timer.getText().toString());
+            timer.stop();
         }
     }
 
