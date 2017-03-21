@@ -376,6 +376,7 @@ public class Gameboard extends AppCompatActivity {
     public void storeScore(int gameKind, int moves, String time) {
         SharedPreferences highscoreSaves = null;
 
+        // set up the sharedpreferences, fitting to the game type and the shuffle number
         switch (gameKind) {
             case NORMAL:
                 highscoreSaves = mContext.getSharedPreferences("classichighscore"+String.valueOf(mStepsToFlush), MODE_PRIVATE);
@@ -394,35 +395,67 @@ public class Gameboard extends AppCompatActivity {
         }
 
         SharedPreferences.Editor editSaveScores = highscoreSaves.edit();
-editSaveScores.clear();
-        editSaveScores.apply();
 
-        String [] bestMoves = {"", "", "", "", "", ""};
-        String [] bestTimes = {"", "", "", "", "", ""};
+        int [] bestMoves = {0, 0, 0, 0, 0, 0};  // stores the best moves
+        int [] bestMovesOrig = {0, 0, 0, 0, 0, 0};  // stores the best moves - doesn't change, reference to the original state
+        String [] bestTimes = {"", "", "", "", "", ""}; // stores the best times
+        String [] bestTimesOrd = {"", "", "", "", "", ""};  // stores the best times, after the sort
 
-        bestMoves[0] = highscoreSaves.getString("best1move", "999999");
-        bestMoves[1] = highscoreSaves.getString("best2move", "999999");
-        bestMoves[2] = highscoreSaves.getString("best3move", "999999");
-        bestMoves[3] = highscoreSaves.getString("best4move", "999999");
-        bestMoves[4] = highscoreSaves.getString("best5move", "999999");
-        bestMoves[5] = String.valueOf(moves+1) + " // " + time;
+        // get the best top 5 moves and their times
+        bestMoves[0] = highscoreSaves.getInt("best1move", 1000000);
+        bestMovesOrig[0] = bestMoves[0];
+        bestMoves[1] = highscoreSaves.getInt("best2move", 1000000);
+        bestMovesOrig[1] = bestMoves[1];
+        bestMoves[2] = highscoreSaves.getInt("best3move", 1000000);
+        bestMovesOrig[2] = bestMoves[2];
+        bestMoves[3] = highscoreSaves.getInt("best4move", 1000000);
+        bestMovesOrig[3] = bestMoves[3];
+        bestMoves[4] = highscoreSaves.getInt("best5move", 1000000);
+        bestMovesOrig[4] = bestMoves[4];
+        bestMoves[5] = moves+1;
+        bestMovesOrig[5] = bestMoves[5];
+
+        bestTimes[0] = highscoreSaves.getString("best1movetime", "00:00");
+        bestTimes[1] = highscoreSaves.getString("best2movetime", "00:00");
+        bestTimes[2] = highscoreSaves.getString("best3movetime", "00:00");
+        bestTimes[3] = highscoreSaves.getString("best4movetime", "00:00");
+        bestTimes[4] = highscoreSaves.getString("best5movetime", "00:00");
+        bestTimes[5] = time;
         Arrays.sort(bestMoves);
 
-        editSaveScores.putString("best1move", bestMoves[0]);
-        editSaveScores.putString("best2move", bestMoves[1]);
-        editSaveScores.putString("best3move", bestMoves[2]);
-        editSaveScores.putString("best4move", bestMoves[3]);
-        editSaveScores.putString("best5move", bestMoves[4]);
-        editSaveScores.apply();
+        // after the sort, we need to find the best times, that were originally linked to the moves
+        for(int i=0; i<=5; i++) {
+            for(int j=0; j<=5; j++) {
+                if(bestMoves[i] == bestMovesOrig[j] && bestMovesOrig[j] != -1)    {
+                    bestTimesOrd[i] = bestTimes[j];
+                    bestMovesOrig[j] = -1;
+                }
+            }
+        }
 
-        bestTimes[0] = highscoreSaves.getString("best1time", "999999");
-        bestTimes[1] = highscoreSaves.getString("best2time", "999999");
-        bestTimes[2] = highscoreSaves.getString("best3time", "999999");
-        bestTimes[3] = highscoreSaves.getString("best4time", "999999");
-        bestTimes[4] = highscoreSaves.getString("best5time", "999999");
+        // write back the top 5 moves and their times
+        editSaveScores.putInt("best1move", bestMoves[0]);
+        editSaveScores.putInt("best2move", bestMoves[1]);
+        editSaveScores.putInt("best3move", bestMoves[2]);
+        editSaveScores.putInt("best4move", bestMoves[3]);
+        editSaveScores.putInt("best5move", bestMoves[4]);
+
+        editSaveScores.putString("best1movetime", bestTimesOrd[0]);
+        editSaveScores.putString("best2movetime", bestTimesOrd[1]);
+        editSaveScores.putString("best3movetime", bestTimesOrd[2]);
+        editSaveScores.putString("best4movetime", bestTimesOrd[3]);
+        editSaveScores.putString("best5movetime", bestTimesOrd[4]);
+
+        // get best top 5 times
+        bestTimes[0] = highscoreSaves.getString("best1time", "1000");
+        bestTimes[1] = highscoreSaves.getString("best2time", "1000");
+        bestTimes[2] = highscoreSaves.getString("best3time", "1000");
+        bestTimes[3] = highscoreSaves.getString("best4time", "1000");
+        bestTimes[4] = highscoreSaves.getString("best5time", "1000");
         bestTimes[5] = time + " // " + String.valueOf(moves+1);
         Arrays.sort(bestTimes);
 
+        // write back after the sort
         editSaveScores.putString("best1time", bestTimes[0]);
         editSaveScores.putString("best2time", bestTimes[1]);
         editSaveScores.putString("best3time", bestTimes[2]);
@@ -430,6 +463,7 @@ editSaveScores.clear();
         editSaveScores.putString("best5time", bestTimes[4]);
         editSaveScores.apply();
 
+        // we are not in game anymore
         inGame = false;
     }
 }
