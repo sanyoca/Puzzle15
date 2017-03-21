@@ -76,7 +76,8 @@
 
     </LinearLayout>
 
-    <LinearLayout style="@style/movesandtime">
+    <LinearLayout
+        style="@style/movesandtime">
 
         <TextView
             style="@style/wrapped"
@@ -92,9 +93,12 @@
     <LinearLayout
         style="@style/movesandtime">
 
-        <TextView
-            style="@style/wrapped"
-            android:text="00:00" />
+        <Chronometer
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:format="%m:%s"
+            android:id="@+id/timer"/>
 
     </LinearLayout>
 

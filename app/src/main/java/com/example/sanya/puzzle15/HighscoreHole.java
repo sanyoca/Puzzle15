@@ -36,13 +36,13 @@ public class HighscoreHole extends Fragment {
         String[] prefFiles = {"holehighscore30", "holehighscore50", "holehighscore100"};
         String[] bestMovesString = {"best1move", "best2move", "best3move", "best4move", "best5move"};
         int[] topMovesLayouts = {R.id.top5moves30layout, R.id.top5moves50layout, R.id.top5moves100layout};
-        int[] bestMoves = {0, 0, 0, 0, 0, 0};
+        String[] bestMoves = {"", "", "", "", "", ""};
         TextView insertThis;
 
         for(int i=0; i<=2; i++) {
             SharedPreferences highscoreSaves = getActivity().getSharedPreferences(prefFiles[i], MODE_PRIVATE);
             for(int j=0; j<=4; j++) {
-                bestMoves[j] = highscoreSaves.getInt(bestMovesString[j], 1000000);
+                bestMoves[j] = highscoreSaves.getString(bestMovesString[j], "0 // 0");
                 LinearLayout insertMovesHere = (LinearLayout) rootView.findViewById(topMovesLayouts[i]);
                 insertThis = new TextView(getActivity());
                 insertThis.setText(String.valueOf(bestMoves[j]));

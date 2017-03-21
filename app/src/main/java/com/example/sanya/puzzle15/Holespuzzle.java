@@ -5,14 +5,17 @@ import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Holespuzzle extends AppCompatActivity implements View.OnClickListener {
+    Chronometer timer;
     Gameboard table;
     int moves = 0;
     private int[] intImageResources = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
@@ -136,7 +139,7 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
         }
         if (table.isGameWon()) {
             Toast.makeText(Holespuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
-            table.storeScore(Gameboard.HOLE, moves);
+            table.storeScore(table.NORMAL, moves, timer.getText().toString());
         }
     }
 
@@ -231,6 +234,10 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
                     table.shuffleTable();
                     // show the table
                     showTable();
+                    timer = (Chronometer) findViewById(R.id.timer);
+                    timer.setBase(SystemClock.elapsedRealtime());
+                    timer.stop();
+                    timer.start();
                     break;
                 }
                 default: {

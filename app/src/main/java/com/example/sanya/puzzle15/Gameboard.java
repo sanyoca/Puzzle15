@@ -373,7 +373,7 @@ public class Gameboard extends AppCompatActivity {
      *              2. if there is a corresponding data, it reads it, then writes back
      */
 
-    public void storeScore(int gameKind, int moves) {
+    public void storeScore(int gameKind, int moves, String time) {
         SharedPreferences highscoreSaves = null;
 
         switch (gameKind) {
@@ -395,20 +395,20 @@ public class Gameboard extends AppCompatActivity {
 
         SharedPreferences.Editor editSaveScores = highscoreSaves.edit();
 
-        int [] bestMoves = {0, 0, 0, 0, 0, 0};
-        bestMoves[0] = highscoreSaves.getInt("best1move", 1000000);
-        bestMoves[1] = highscoreSaves.getInt("best2move", 1000000);
-        bestMoves[2] = highscoreSaves.getInt("best3move", 1000000);
-        bestMoves[3] = highscoreSaves.getInt("best4move", 1000000);
-        bestMoves[4] = highscoreSaves.getInt("best5move", 1000000);
-        bestMoves[5] = moves;
+        String [] bestMoves = {"", "", "", "", "", ""};
+        bestMoves[0] = highscoreSaves.getString("best1move", "999999");
+        bestMoves[1] = highscoreSaves.getString("best2move", "999999");
+        bestMoves[2] = highscoreSaves.getString("best3move", "999999");
+        bestMoves[3] = highscoreSaves.getString("best4move", "999999");
+        bestMoves[4] = highscoreSaves.getString("best5move", "999999");
+        bestMoves[5] = String.valueOf(moves+1) + " // " + time;
         Arrays.sort(bestMoves);
 
-        editSaveScores.putInt("best1move", bestMoves[0]);
-        editSaveScores.putInt("best2move", bestMoves[1]);
-        editSaveScores.putInt("best3move", bestMoves[2]);
-        editSaveScores.putInt("best4move", bestMoves[3]);
-        editSaveScores.putInt("best5move", bestMoves[4]);
+        editSaveScores.putString("best1move", bestMoves[0]);
+        editSaveScores.putString("best2move", bestMoves[1]);
+        editSaveScores.putString("best3move", bestMoves[2]);
+        editSaveScores.putString("best4move", bestMoves[3]);
+        editSaveScores.putString("best5move", bestMoves[4]);
         editSaveScores.apply();
 
         inGame = false;

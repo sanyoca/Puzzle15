@@ -5,10 +5,12 @@ import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 public class Picturepuzzle extends AppCompatActivity implements View.OnClickListener {
     Gameboard table;
     int moves = 0;
+    Chronometer timer;
     private int whichImage = 0;
     private int[][] intImageResources = {{0, R.drawable.horse_1, R.drawable.horse_2, R.drawable.horse_3, R.drawable.horse_4, R.drawable.horse_5, R.drawable.horse_6, R.drawable.horse_7, R.drawable.horse_8, R.drawable.horse_9, R.drawable.horse_10, R.drawable.horse_11, R.drawable.horse_12, R.drawable.horse_13, R.drawable.horse_14, R.drawable.horse_15, R.drawable.horse_16},{0, R.drawable.thor_1, R.drawable.thor_2, R.drawable.thor_3, R.drawable.thor_4, R.drawable.thor_5, R.drawable.thor_6, R.drawable.thor_7, R.drawable.thor_8, R.drawable.thor_9, R.drawable.thor_10, R.drawable.thor_11, R.drawable.thor_12, R.drawable.thor_13, R.drawable.thor_14, R.drawable.thor_15, R.drawable.thor_16}};
 
@@ -165,7 +168,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         }
         if (table.isGameWon()) {
             Toast.makeText(Picturepuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
-            table.storeScore(Gameboard.PICTURE, moves);
+            table.storeScore(table.NORMAL, moves, timer.getText().toString());
         }
     }
 
@@ -259,6 +262,10 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
                     table.shuffleTable();
                     // show the table
                     showTable();
+                    timer = (Chronometer) findViewById(R.id.timer);
+                    timer.setBase(SystemClock.elapsedRealtime());
+                    timer.stop();
+                    timer.start();
                     break;
                 }
                 default: {
