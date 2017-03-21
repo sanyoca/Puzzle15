@@ -370,7 +370,7 @@ public class Gameboard extends AppCompatActivity {
      *
      * this method does a lot of things:
      *              1. creates sharedpreferences for each of the puzzle types
-     *              2. if there is a corresponding data, it reads it, then writes back
+     *              2. if there is a corresponding data, it reads it, then writes back to/from sharedpreferences
      */
 
     public void storeScore(int gameKind, int moves, String time) {
