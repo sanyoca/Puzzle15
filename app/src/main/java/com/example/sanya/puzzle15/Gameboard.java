@@ -394,8 +394,12 @@ public class Gameboard extends AppCompatActivity {
         }
 
         SharedPreferences.Editor editSaveScores = highscoreSaves.edit();
+editSaveScores.clear();
+        editSaveScores.apply();
 
         String [] bestMoves = {"", "", "", "", "", ""};
+        String [] bestTimes = {"", "", "", "", "", ""};
+
         bestMoves[0] = highscoreSaves.getString("best1move", "999999");
         bestMoves[1] = highscoreSaves.getString("best2move", "999999");
         bestMoves[2] = highscoreSaves.getString("best3move", "999999");
@@ -409,6 +413,21 @@ public class Gameboard extends AppCompatActivity {
         editSaveScores.putString("best3move", bestMoves[2]);
         editSaveScores.putString("best4move", bestMoves[3]);
         editSaveScores.putString("best5move", bestMoves[4]);
+        editSaveScores.apply();
+
+        bestTimes[0] = highscoreSaves.getString("best1time", "999999");
+        bestTimes[1] = highscoreSaves.getString("best2time", "999999");
+        bestTimes[2] = highscoreSaves.getString("best3time", "999999");
+        bestTimes[3] = highscoreSaves.getString("best4time", "999999");
+        bestTimes[4] = highscoreSaves.getString("best5time", "999999");
+        bestTimes[5] = time + " // " + String.valueOf(moves+1);
+        Arrays.sort(bestTimes);
+
+        editSaveScores.putString("best1time", bestTimes[0]);
+        editSaveScores.putString("best2time", bestTimes[1]);
+        editSaveScores.putString("best3time", bestTimes[2]);
+        editSaveScores.putString("best4time", bestTimes[3]);
+        editSaveScores.putString("best5time", bestTimes[4]);
         editSaveScores.apply();
 
         inGame = false;
