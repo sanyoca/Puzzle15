@@ -6,7 +6,15 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import static com.example.sanya.puzzle15.R.id.button_highscores;
+import static com.example.sanya.puzzle15.R.id.button_quitgame;
+import static com.example.sanya.puzzle15.R.id.button_rules;
+import static com.example.sanya.puzzle15.R.id.button_startholes;
+import static com.example.sanya.puzzle15.R.id.button_startpicture;
+import static com.example.sanya.puzzle15.R.id.button_startwalls;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,15 +29,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Typeface fontHarrington = Typeface.createFromAsset(getAssets(), "fonts/harrington.TTF");
         TextView gameTitle = (TextView) findViewById(R.id.textview_gametitle);
         gameTitle.setTypeface(fontHarrington);
-
-        // set up the onClicklistener for the game buttons
-        findViewById(R.id.button_startclassical).setOnClickListener(this);
-        findViewById(R.id.button_startpicture).setOnClickListener(this);
-        findViewById(R.id.button_startholes).setOnClickListener(this);
-        findViewById(R.id.button_quitgame).setOnClickListener(this);
-        // findViewById(R.id.button_startwalls).setOnClickListener(this);
-        findViewById(R.id.button_highscores).setOnClickListener(this);
-        findViewById(R.id.button_rules).setOnClickListener(this);
+        // and for the buttons - also set the onclicklistener
+        int[] buttons = {R.id.button_startclassical, R.id.button_startpicture, R.id.button_startholes, R.id.button_startwalls, R.id.button_highscores, R.id.button_rules, R.id.button_quitgame};
+        Button fontChangeButton;
+        for(int i = 0; i<=6; i++)   {
+            fontChangeButton = (Button) findViewById(buttons[i]);
+            fontChangeButton.setOnClickListener(this);
+            fontChangeButton.setTypeface(fontHarrington);
+        }
     }
 
     /**
@@ -49,40 +56,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             // starts the picture solve game
-            case R.id.button_startpicture: {
+            case button_startpicture: {
                 intentStart = new Intent(MainActivity.this, Picturepuzzle.class);
                 startActivity(intentStart);
                 break;
             }
             // starts the hole version game
-            case R.id.button_startholes: {
+            case button_startholes: {
                 intentStart = new Intent(MainActivity.this, Holespuzzle.class);
                 startActivity(intentStart);
                 break;
             }
             // starts the walls version game
-            case R.id.button_startwalls: {
+            case button_startwalls: {
                 intentStart = new Intent(MainActivity.this, Wallspuzzle.class);
                 startActivity(intentStart);
                 break;
             }
 
             // shows the high scores
-            case R.id.button_highscores: {
+            case button_highscores: {
                 intentStart = new Intent(MainActivity.this, Highscores.class);
                 startActivity(intentStart);
                 break;
             }
 
             // displays the rules and history
-            case R.id.button_rules: {
+            case button_rules: {
                 intentStart = new Intent(MainActivity.this, Showrules.class);
                 startActivity(intentStart);
                 break;
             }
 
             // quits the game
-            case R.id.button_quitgame:  {
+            case button_quitgame:  {
                 this.finishAffinity();
             }
             default: {
