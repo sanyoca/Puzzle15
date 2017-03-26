@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static android.view.View.GONE;
+
 public class Classicalpuzzle extends AppCompatActivity implements View.OnClickListener {
     Gameboard table;
     int moves = 0;
@@ -232,6 +234,8 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
                     table.shuffleTable();
                     // show the table
                     showTable();
+                    findViewById(R.id.radionshuffle).setVisibility(GONE);
+                    findViewById(R.id.movesandtime).setVisibility(View.VISIBLE);
                     timer = (Chronometer) findViewById(R.id.timer);
                     timer.setBase(SystemClock.elapsedRealtime());
                     timer.stop();

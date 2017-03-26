@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static android.view.View.GONE;
+
 public class Picturepuzzle extends AppCompatActivity implements View.OnClickListener {
     Gameboard table;
     int moves = 0;
@@ -263,6 +265,8 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
                     table.shuffleTable();
                     // show the table
                     showTable();
+                    findViewById(R.id.radionshuffle).setVisibility(GONE);
+                    findViewById(R.id.movesandtime).setVisibility(View.VISIBLE);
                     timer = (Chronometer) findViewById(R.id.timer);
                     timer.setBase(SystemClock.elapsedRealtime());
                     timer.stop();

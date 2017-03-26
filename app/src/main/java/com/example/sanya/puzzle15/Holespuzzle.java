@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static android.view.View.GONE;
+
 public class Holespuzzle extends AppCompatActivity implements View.OnClickListener {
     Chronometer timer;
     Gameboard table;
@@ -235,6 +237,8 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
                     table.shuffleTable();
                     // show the table
                     showTable();
+                    findViewById(R.id.radionshuffle).setVisibility(GONE);
+                    findViewById(R.id.movesandtime).setVisibility(View.VISIBLE);
                     timer = (Chronometer) findViewById(R.id.timer);
                     timer.setBase(SystemClock.elapsedRealtime());
                     timer.stop();

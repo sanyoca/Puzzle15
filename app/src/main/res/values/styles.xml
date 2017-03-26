@@ -89,11 +89,19 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="movesandtime">
+    <style name="movesandtimetext">
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="movesandtime">
+        <item name="android:visibility">gone</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>
