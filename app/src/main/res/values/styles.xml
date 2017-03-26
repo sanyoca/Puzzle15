@@ -32,10 +32,12 @@
     </style>
 
     <style name="toptitle" parent="gametitle">
+        <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textSize">@dimen/toptitle_fontsize</item>
     </style>
 
     <style name="subtitle" parent="gametitle">
+        <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:textSize">@dimen/subtitle_fontsize</item>
     </style>
@@ -74,8 +76,8 @@
     </style>
 
     <style name="shufflebutton" parent="wrapped">
-        <item name="android:paddingLeft">30dp</item>
-        <item name="android:paddingRight">30dp</item>
+        <item name="android:paddingLeft">@dimen/shufflebutton_padding</item>
+        <item name="android:paddingRight">@dimen/shufflebutton_padding</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
     </style>
 

@@ -16,8 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/background_frame"
-        android:paddingBottom="70dp"
-        android:elevation="8dp"
+        android:paddingBottom="@dimen/start_padding_bottom"
+        android:elevation="@dimen/start_elevation"
         android:orientation="vertical">
 
         <RelativeLayout
