@@ -2,82 +2,93 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/titletop5moves"
-            style="@style/toptitle"
-            android:text="Top 5 moves" />
-
-        <TextView
-            android:id="@+id/textView"
-            style="@style/subtitle"
-            android:text="@string/steps30" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/top5moves30layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            style="@style/highscoretables">
 
-        <TextView
-            style="@style/subtitle"
-            android:text="@string/steps50" />
+            <TextView
+                android:id="@+id/titletop5moves"
+                style="@style/toptitle"
+                android:text="Top 5 moves" />
 
-        <LinearLayout
-            android:id="@+id/top5moves50layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            <TextView
+                android:id="@+id/textView"
+                style="@style/subtitle"
+                android:text="@string/steps30" />
 
-        <TextView
-            style="@style/subtitle"
-            android:text="@string/steps100" />
+            <LinearLayout
+                android:id="@+id/top5moves30layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/top5moves100layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            <TextView
+                style="@style/subtitle"
+                android:text="@string/steps50" />
 
-        <TextView
-            android:id="@+id/titletop5times"
-            style="@style/toptitle"
-            android:text="Top 5 times" />
+            <LinearLayout
+                android:id="@+id/top5moves50layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
 
-        <TextView
-            style="@style/subtitle"
-            android:text="@string/steps30" />
+            <TextView
+                style="@style/subtitle"
+                android:text="@string/steps100" />
 
-        <LinearLayout
-            android:id="@+id/top5times30layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
-
-        <TextView
-            style="@style/subtitle"
-            android:text="@string/steps50" />
+            <LinearLayout
+                android:id="@+id/top5moves100layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/top5times50layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            style="@style/highscoretables">
 
-        <TextView
-            style="@style/subtitle"
-            android:text="@string/steps100" />
+            <TextView
+                android:id="@+id/titletop5times"
+                style="@style/toptitle"
+                android:text="Top 5 times" />
 
-        <LinearLayout
-            android:id="@+id/top5times100layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            <TextView
+                style="@style/subtitle"
+                android:text="@string/steps30" />
+
+            <LinearLayout
+                android:id="@+id/top5times30layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+
+            <TextView
+                style="@style/subtitle"
+                android:text="@string/steps50" />
+
+            <LinearLayout
+                android:id="@+id/top5times50layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+
+            <TextView
+                style="@style/subtitle"
+                android:text="@string/steps100" />
+
+            <LinearLayout
+                android:id="@+id/top5times100layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

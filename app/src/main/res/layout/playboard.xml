@@ -13,17 +13,13 @@
     tools:context="com.example.sanya.puzzle15.MainActivity">
 
     <LinearLayout
+        style="@style/playboardstyle"
         android:id="@+id/frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_frame"
-        android:orientation="vertical">
-        ">
+        android:background="@drawable/background_frame">
 
         <LinearLayout
             android:id="@+id/row1"
-            style="@style/rowlayouts"
-            android:layout_marginTop="23dp"></LinearLayout>
+            style="@style/rowlayouts"></LinearLayout>
 
         <LinearLayout
             android:id="@+id/row2"
