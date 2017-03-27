@@ -13,8 +13,8 @@
     tools:context="com.example.sanya.puzzle15.MainActivity">
 
     <LinearLayout
-        style="@style/playboardstyle"
         android:id="@+id/frame"
+        style="@style/playboardstyle"
         android:background="@drawable/background_frame">
 
         <LinearLayout
