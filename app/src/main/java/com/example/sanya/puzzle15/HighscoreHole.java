@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class HighscoreHole extends Fragment {
 
                 insertThisMoves = new TextView(getActivity());
                 insertThisMoves.setText(String.valueOf(bestMoves[j]) + " // " + bestMovesTimes[j]);
+                insertThisMoves.setGravity(Gravity.CENTER_HORIZONTAL);
                 insertMovesHere.addView(insertThisMoves);
 
                 bestTimes[j] = highscoreSaves.getString(bestTimesString[j], "00:00 // 0");
@@ -63,6 +65,7 @@ public class HighscoreHole extends Fragment {
                 LinearLayout insertTimesHere = (LinearLayout) rootView.findViewById(topTimesLayouts[i]);
                 insertThisTimes = new TextView(getActivity());
                 insertThisTimes.setText(bestTimes[j]);
+                insertThisTimes.setGravity(Gravity.CENTER_HORIZONTAL);
                 insertTimesHere.addView(insertThisTimes);
             }
         }

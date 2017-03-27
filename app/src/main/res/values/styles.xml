@@ -32,6 +32,7 @@
     </style>
 
     <style name="toptitle" parent="gametitle">
+        <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textSize">@dimen/toptitle_fontsize</item>
     </style>

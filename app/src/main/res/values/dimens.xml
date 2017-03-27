@@ -9,6 +9,6 @@
     <dimen name="start_padding_bottom">70dp</dimen>
     <dimen name="start_elevation">8dp</dimen>
     <dimen name="shufflebutton_padding">30dp</dimen>
-    <dimen name="scoretable_padding">30dp</dimen>
+    <dimen name="scoretable_padding">60dp</dimen>
     <dimen name="gameboard_top_padding">24dp</dimen>
 </resources>
