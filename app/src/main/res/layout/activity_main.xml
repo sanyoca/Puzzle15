@@ -9,7 +9,7 @@
     <ImageView
         style="@style/startbackground"
         android:contentDescription="@string/background"
-        android:src="@drawable/new_bg" />
+        android:src="@drawable/new_bg2" />
 
     <LinearLayout
         android:layout_centerInParent="true"

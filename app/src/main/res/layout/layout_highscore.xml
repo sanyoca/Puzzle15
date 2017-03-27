@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/new_bg2"
     android:orientation="vertical">
 
     <LinearLayout
@@ -51,7 +51,8 @@
         </LinearLayout>
 
         <LinearLayout
-            style="@style/highscoretables">
+            style="@style/highscoretables"
+            android:layout_marginBottom="@dimen/activity_vertical_margin">
 
             <TextView
                 android:id="@+id/titletop5times"
