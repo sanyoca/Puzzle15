@@ -9,15 +9,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import static android.R.attr.pivotX;
-import static android.R.attr.pivotY;
 import static com.example.sanya.puzzle15.R.id.button_highscores;
 import static com.example.sanya.puzzle15.R.id.button_quitgame;
 import static com.example.sanya.puzzle15.R.id.button_rules;
@@ -111,6 +105,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // media player once the sound has finished playing.
             mMediaPlayer.setOnCompletionListener(mCompletionListener);
         }
+
+// TODO: Implement these line of codes for all the tiles and all the game types
+/*
+        ImageView imageSlice = (ImageView) findViewById(R.id.imagehere);
+        Bitmap imageToCut = BitmapFactory.decodeResource(getResources(),
+                R.drawable.thor2);
+        imageSlice.setImageBitmap(Bitmap.createBitmap(imageToCut, 200, 200, 100, 100));
+*/
     }
 
     /**
@@ -165,6 +167,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // quits the game
             case button_quitgame:  {
                 this.finishAffinity();
+// TODO: these lines are for picking an image from the device image gallery
+/*
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 0);
+*/
+// TODO: and these lines are for reading and inserting the selected image
+/*
+  @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (resultCode == RESULT_OK){
+     Uri targetUri = data.getData();
+     textTargetUri.setText(targetUri.toString());
+     Bitmap bitmap;
+     try {
+      bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+      targetImage.setImageBitmap(bitmap);
+     } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+     }
+    }
+*/
             }
             default: {
                 break;
