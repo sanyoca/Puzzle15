@@ -54,6 +54,7 @@ public class HighscorePicture extends Fragment {
                 LinearLayout insertMovesHere = (LinearLayout) rootView.findViewById(topMovesLayouts[i]);
 
                 insertThisMoves = new TextView(getActivity());
+                if(bestMovesTimes[j] == "") bestMovesTimes[j]="00:00";
                 insertThisMoves.setText(String.valueOf(bestMoves[j]) + " // " + bestMovesTimes[j]);
                 insertThisMoves.setGravity(Gravity.CENTER_HORIZONTAL);
                 insertMovesHere.addView(insertThisMoves);

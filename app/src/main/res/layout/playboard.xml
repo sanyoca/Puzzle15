@@ -15,7 +15,7 @@
     <LinearLayout
         android:id="@+id/frame"
         style="@style/playboardstyle"
-        android:background="@drawable/background_frame">
+        android:background="@drawable/vic_background_frame">
 
         <LinearLayout
             android:id="@+id/row1"

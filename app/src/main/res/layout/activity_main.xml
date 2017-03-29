@@ -9,13 +9,15 @@
     <ImageView
         style="@style/startbackground"
         android:contentDescription="@string/background"
-        android:src="@drawable/new_bg2" />
+        android:id="@+id/image_start_background"
+        android:src="@drawable/bg_sp" />
 
     <LinearLayout
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_frame"
+        android:id="@+id/splashscreen"
+        android:background="@drawable/sp_background_frame"
         android:paddingBottom="@dimen/start_padding_bottom"
         android:elevation="@dimen/start_elevation"
         android:orientation="vertical">
@@ -33,39 +35,37 @@
 
         </RelativeLayout>
 
-        <Button
+        <TextView
             android:id="@+id/button_startclassical"
             style="@style/gamebuttons"
             android:text="@string/classical" />
 
-        <Button
+        <TextView
             android:id="@+id/button_startpicture"
             style="@style/gamebuttons"
             android:text="@string/solveapicture" />
 
-        <Button
+        <TextView
             android:id="@+id/button_startholes"
             style="@style/gamebuttons"
             android:text="@string/classicalwithholes" />
 
-        <Button
-            android:id="@+id/button_startwalls"
-            style="@style/gamebuttons"
-            android:text="@string/classicalwithwalls"
-            android:clickable="false"
-            android:enabled="false"/>
-
-        <Button
+        <TextView
             android:id="@+id/button_highscores"
             style="@style/gamebuttons"
             android:text="@string/highscores" />
 
-        <Button
+        <TextView
+            android:id="@+id/button_settings"
+            style="@style/gamebuttons"
+            android:text="@string/settings" />
+
+        <TextView
             android:id="@+id/button_rules"
             style="@style/gamebuttons"
             android:text="@string/about" />
 
-        <Button
+        <TextView
             android:id="@+id/button_quitgame"
             style="@style/gamebuttons"
             android:text="@string/quitgame" />

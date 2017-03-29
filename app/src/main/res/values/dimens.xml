@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="double_margin">40dp</dimen>
+    <dimen name="half_margin">4dp</dimen>
     <dimen name="gametitle_fontsize">45sp</dimen>
     <dimen name="toptitle_fontsize">25sp</dimen>
     <dimen name="subtitle_fontsize">20sp</dimen>
@@ -10,5 +11,5 @@
     <dimen name="start_elevation">8dp</dimen>
     <dimen name="shufflebutton_padding">30dp</dimen>
     <dimen name="scoretable_padding">60dp</dimen>
-    <dimen name="gameboard_top_padding">24dp</dimen>
+    <dimen name="gameboard_top_padding">26dp</dimen>
 </resources>

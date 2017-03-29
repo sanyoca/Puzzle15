@@ -39,16 +39,22 @@
 
     <style name="subtitle" parent="gametitle">
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginTop">10dp</item>
         <item name="android:textSize">@dimen/subtitle_fontsize</item>
     </style>
 
     <style name="gamebuttons">
-        <item name="android:background">@color/dirtywhite</item>
+        <item name="android:layout_marginTop">@dimen/half_margin</item>
+        <item name="android:layout_marginBottom">@dimen/half_margin</item>
+        <!--<item name="android:background">@color/dirtywhite</item>-->
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
@@ -111,7 +117,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
-        <item name="android:background">@drawable/background_frame</item>
+        <item name="android:background">@drawable/vic_background_frame</item>
         <item name="android:orientation">vertical</item>
         <item name="android:elevation">@dimen/start_elevation</item>
     </style>
@@ -120,8 +126,8 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:background">@drawable/background_frame</item>
-        <item name="android:paddingTop">@dimen/gameboard_top_padding</item>
+        <item name="android:background">@drawable/vic_background_frame</item>
+        <item name="android:padding">@dimen/gameboard_top_padding</item>
         <item name="android:orientation">vertical</item>
     </style>
 

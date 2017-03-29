@@ -2,6 +2,7 @@ package com.example.sanya.puzzle15;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.media.AudioManager;
@@ -9,15 +10,16 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import static com.example.sanya.puzzle15.R.id.button_highscores;
 import static com.example.sanya.puzzle15.R.id.button_quitgame;
 import static com.example.sanya.puzzle15.R.id.button_rules;
+import static com.example.sanya.puzzle15.R.id.button_settings;
 import static com.example.sanya.puzzle15.R.id.button_startholes;
 import static com.example.sanya.puzzle15.R.id.button_startpicture;
-import static com.example.sanya.puzzle15.R.id.button_startwalls;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     /**
@@ -75,35 +77,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // no lolligaggin with the screen !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        // read the configuration and apply
+        SharedPreferences configuration = this.getSharedPreferences("config", MODE_PRIVATE);
+        String stringTheme =  configuration.getString("theme", "Victorian");
+        boolean isMusic = configuration.getBoolean("music", true);
+        boolean isSound = configuration.getBoolean("sound", true);
         // import/set a font for the title
-        Typeface fontHarrington = Typeface.createFromAsset(getAssets(), "fonts/harrington.TTF");
-        TextView gameTitle = (TextView) findViewById(R.id.textview_gametitle);
-        gameTitle.setTypeface(fontHarrington);
-        // and for the buttons - also set the onclicklistener
-        int[] buttons = {R.id.button_startclassical, R.id.button_startpicture, R.id.button_startholes, R.id.button_startwalls, R.id.button_highscores, R.id.button_rules, R.id.button_quitgame};
-        Button fontChangeButton;
-        for(int i = 0; i<=6; i++)   {
-            fontChangeButton = (Button) findViewById(buttons[i]);
-            fontChangeButton.setOnClickListener(this);
-            fontChangeButton.setTypeface(fontHarrington);
+        Typeface themeFontStyle;
+        int intMusic;
+        ImageView startBackgroundImage = (ImageView) findViewById(R.id.image_start_background);
+        LinearLayout linearSplashScreen = (LinearLayout) findViewById(R.id.splashscreen);
+        if(stringTheme.equals("Victorian")) { // victorian style
+            themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/harrington.TTF");
+            intMusic = R.raw.theme_vic;
+            linearSplashScreen.setBackgroundResource(R.drawable.vic_background_frame);
+            startBackgroundImage.setImageResource(R.drawable.bg_vic);
+        }   else    { // steampunk style
+            themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/SancreekRegular.ttf");
+            intMusic = R.raw.theme_sp;
+            startBackgroundImage.setImageResource(R.drawable.bg_sp);
+            linearSplashScreen.setBackgroundResource(R.drawable.sp_background_frame);
         }
-        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
-                AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+        TextView gameTitle = (TextView) findViewById(R.id.textview_gametitle);
+        gameTitle.setTypeface(themeFontStyle);
+        // and for the buttons - also set the onclicklistener
+        int[] buttons = {R.id.button_startclassical, R.id.button_startpicture, R.id.button_startholes, R.id.button_settings, R.id.button_highscores, R.id.button_rules, R.id.button_quitgame};
+        TextView fontChangeButton;
+        for(int i = 0; i<=6; i++)   {
+            fontChangeButton = (TextView) findViewById(buttons[i]);
+            fontChangeButton.setOnClickListener(this);
+            fontChangeButton.setTypeface(themeFontStyle);
+        }
 
-        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-            // We have audio focus now.
+        if(isMusic) {
+            mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                    AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
-            // Create and setup the {@link MediaPlayer} for the audio resource associated
-            // with the current word
-            mMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.theme_vic);
+            if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                // We have audio focus now.
 
-            // Start the audio file
-            mMediaPlayer.start();
+                // Create and setup the {@link MediaPlayer} for the audio resource associated
+                // with the current word
+                mMediaPlayer = MediaPlayer.create(MainActivity.this, intMusic);
 
-            // Setup a listener on the media player, so that we can stop and release the
-            // media player once the sound has finished playing.
-            mMediaPlayer.setOnCompletionListener(mCompletionListener);
+                // Start the audio file
+                mMediaPlayer.start();
+
+                // Setup a listener on the media player, so that we can stop and release the
+                // media player once the sound has finished playing.
+                mMediaPlayer.setOnCompletionListener(mCompletionListener);
+            }
         }
 
 // TODO: Implement these line of codes for all the tiles and all the game types
@@ -144,8 +168,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             // starts the walls version game
-            case button_startwalls: {
-                intentStart = new Intent(MainActivity.this, Wallspuzzle.class);
+            case button_settings: {
+                releaseMediaPlayer();
+                intentStart = new Intent(MainActivity.this, Settings.class);
                 startActivity(intentStart);
                 break;
             }

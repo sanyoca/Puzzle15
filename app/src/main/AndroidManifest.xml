@@ -37,8 +37,8 @@
                 android:value=".MainActivity" />
         </activity>
 
-        <activity android:name=".Wallspuzzle"
-            android:label="15 puzzle with walls"
+        <activity android:name=".Settings"
+            android:label="Settings"
             android:theme="@style/subTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

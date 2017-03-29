@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/new_bg2"
+    android:id="@+id/highscore_scroll"
+    android:background="@drawable/bg_vic"
     android:orientation="vertical">
 
     <LinearLayout
@@ -11,7 +12,8 @@
         android:orientation="vertical">
 
         <LinearLayout
-            style="@style/highscoretables">
+            style="@style/highscoretables"
+            android:id="@+id/top5moves">
 
             <TextView
                 android:id="@+id/titletop5moves"
@@ -52,6 +54,7 @@
 
         <LinearLayout
             style="@style/highscoretables"
+            android:id="@+id/top5times"
             android:layout_marginBottom="@dimen/activity_vertical_margin">
 
             <TextView

@@ -1,16 +1,20 @@
 package com.example.sanya.puzzle15;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +24,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
     Gameboard table;
     int moves = 0;
     Chronometer timer;
+    boolean isSound = true;
     private int[] intImageResources = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
 
     /**
@@ -79,14 +84,34 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Create and setup the {@link AudioManager} to request audio focus
+        SharedPreferences configuration = getApplication().getSharedPreferences("config", MODE_PRIVATE);
+        String stringTheme = configuration.getString("theme", "Victorian");
+        boolean isSound = configuration.getBoolean("sound", true);
+        Typeface themeFontStyle = null;
+        if (stringTheme.equals("Victorian")) {
+            findViewById(R.id.frame).setBackgroundResource(R.drawable.vic_background_frame);
+            themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/harrington.TTF");
+        } else  {
+            themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/SancreekRegular.ttf");
+            findViewById(R.id.frame).setBackgroundResource(R.drawable.sp_background_frame);
+        }
+        RadioButton b30 = (RadioButton) findViewById(R.id.button30);
+        b30.setTypeface(themeFontStyle);
+        b30.setOnClickListener(this);
+        RadioButton b50 = (RadioButton) findViewById(R.id.button50);
+        b50.setTypeface(themeFontStyle);
+        b50.setOnClickListener(this);
+        RadioButton b100 = (RadioButton) findViewById(R.id.button100);
+        b100.setTypeface(themeFontStyle);
+        b100.setOnClickListener(this);
+        Button shuffle = (Button) findViewById(R.id.shufflebutton);
+        shuffle.setOnClickListener(this);
+        shuffle.setTypeface(themeFontStyle);
+
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         table = new Gameboard(this, Gameboard.NORMAL);
-        // set up the OnClickListener for the 10-30-50 radiobuttons and the shufflebutton
-        findViewById(R.id.button30).setOnClickListener(this);
-        findViewById(R.id.button50).setOnClickListener(this);
-        findViewById(R.id.button100).setOnClickListener(this);
-        findViewById(R.id.shufflebutton).setOnClickListener(this);
+
         showTable();
     }
 
@@ -126,10 +151,10 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
                         rowLayout = (LinearLayout) findViewById(R.id.row4);
                 }
                 String e = String.valueOf(table.getBoardValue(col, row));
-                newTile.setPadding(pxToDp(6),pxToDp(6), pxToDp(6), pxToDp(6));
+                newTile.setPadding(pxToDp(0), pxToDp(2), pxToDp(2), pxToDp(2));
                 newTile.setImageResource(intImageResources[Integer.valueOf(e)]);
                 LinearLayout ll = new LinearLayout(this);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(pxToDp(160), pxToDp(160));
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(pxToDp(70), pxToDp(70));
                 newTile.setLayoutParams(layoutParams);
                 newTile.setTag(String.valueOf(e));
                 newTile.setOnClickListener(this);
@@ -202,9 +227,9 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
                 }
                 // show the rearranged table
                 showTable();
-                moves ++;
+                moves++;
                 TextView movesText = (TextView) findViewById(R.id.moves_textview);
-                movesText.setText(": "+String.valueOf(moves));
+                movesText.setText(": " + String.valueOf(moves));
             }
 
             // not a tile was clicked, but a radiobutton or the flush button
@@ -281,7 +306,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
     // converts px values to dp
     public int pxToDp(int px) {
         float scale = getResources().getDisplayMetrics().density;
-        return (int) ((px/scale)+0.5f);
+        return (int) ((px * scale) + 0.5f);
     }
 
 }
