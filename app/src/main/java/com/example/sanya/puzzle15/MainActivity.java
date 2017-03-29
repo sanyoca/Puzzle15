@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentStart);
                 break;
             }
-            // starts the walls version game
+            // settings
             case button_settings: {
                 releaseMediaPlayer();
                 intentStart = new Intent(MainActivity.this, Settings.class);
