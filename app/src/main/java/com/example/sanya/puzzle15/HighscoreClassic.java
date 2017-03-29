@@ -27,13 +27,6 @@ public class HighscoreClassic extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.layout_highscore, container, false);
 
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/harrington.TTF");
-        TextView top5MovesView = (TextView) rootView.findViewById(R.id.titletop5moves);
-        top5MovesView.setTypeface(font);
-
-        TextView top5TimeView = (TextView) rootView.findViewById(R.id.titletop5times);
-        top5TimeView.setTypeface(font);
-
         String[] prefFiles = {"classichighscore30", "classichighscore50", "classichighscore100"};
         String[] bestMovesString = {"best1move", "best2move", "best3move", "best4move", "best5move"};
         String[] bestMovesTimesString = {"best1movetime", "best2movetime", "best3movetime", "best4movetime", "best5movetime"};
@@ -45,6 +38,25 @@ public class HighscoreClassic extends Fragment {
         String[] bestTimes = {"", "", "", "", "", ""};
         TextView insertThisMoves, insertThisTimes;
 
+        SharedPreferences configuration = getActivity().getSharedPreferences("config", MODE_PRIVATE);
+        String stringTheme = configuration.getString("theme", "Victorian");
+        Typeface themeFontStyle;
+        if (stringTheme.equals("Victorian")) {
+            rootView.findViewById(R.id.highscore_scroll).setBackgroundResource(R.drawable.bg_vic);
+            themeFontStyle = Typeface.createFromAsset(getActivity().getAssets(), "fonts/harrington.TTF");
+        } else  {
+            rootView.findViewById(R.id.highscore_scroll).setBackgroundResource(R.drawable.bg_sp);
+            themeFontStyle = Typeface.createFromAsset(getActivity().getAssets(), "fonts/SancreekRegular.ttf");
+        }
+
+        final int[] intTilesResources = {R.id.titletop5moves, R.id.textView_top5moves_30steps, R.id.textView_top5moves_50steps, R.id.textView_top5moves_100steps, R.id.titletop5times, R.id.textView_top5times_30steps, R.id.textView_top5times_50steps, R.id.textView_top5times_100steps};
+
+        TextView tv;
+        for(int i=0; i<=7; i++) {
+            tv = (TextView) rootView.findViewById(intTilesResources[i]);
+            tv.setTypeface(themeFontStyle);
+        }
+
         for(int i=0; i<=2; i++) {
             SharedPreferences highscoreSaves = getActivity().getSharedPreferences(prefFiles[i], MODE_PRIVATE);
             for(int j=0; j<=4; j++) {
@@ -54,7 +66,7 @@ public class HighscoreClassic extends Fragment {
                 LinearLayout insertMovesHere = (LinearLayout) rootView.findViewById(topMovesLayouts[i]);
 
                 insertThisMoves = new TextView(getActivity());
-                if(bestMovesTimes[j] == "") bestMovesTimes[j]="00:00";
+                if(bestMovesTimes[j].equals("")) bestMovesTimes[j]="00:00";
                 insertThisMoves.setText(String.valueOf(bestMoves[j]) + " // " + bestMovesTimes[j]);
                 insertThisMoves.setGravity(Gravity.CENTER_HORIZONTAL);
                 insertMovesHere.addView(insertThisMoves);

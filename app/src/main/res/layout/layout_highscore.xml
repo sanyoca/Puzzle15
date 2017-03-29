@@ -18,10 +18,10 @@
             <TextView
                 android:id="@+id/titletop5moves"
                 style="@style/toptitle"
-                android:text="Top 5 moves" />
+                android:text="@string/top5moves" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textView_top5moves_30steps"
                 style="@style/subtitle"
                 android:text="@string/steps30" />
 
@@ -32,6 +32,7 @@
                 android:orientation="vertical"></LinearLayout>
 
             <TextView
+                android:id="@+id/textView_top5moves_50steps"
                 style="@style/subtitle"
                 android:text="@string/steps50" />
 
@@ -42,6 +43,7 @@
                 android:orientation="vertical"></LinearLayout>
 
             <TextView
+                android:id="@+id/textView_top5moves_100steps"
                 style="@style/subtitle"
                 android:text="@string/steps100" />
 
@@ -60,9 +62,10 @@
             <TextView
                 android:id="@+id/titletop5times"
                 style="@style/toptitle"
-                android:text="Top 5 times" />
+                android:text="@string/top5times" />
 
             <TextView
+                android:id="@+id/textView_top5times_30steps"
                 style="@style/subtitle"
                 android:text="@string/steps30" />
 
@@ -73,6 +76,7 @@
                 android:orientation="vertical"></LinearLayout>
 
             <TextView
+                android:id="@+id/textView_top5times_50steps"
                 style="@style/subtitle"
                 android:text="@string/steps50" />
 
@@ -83,6 +87,7 @@
                 android:orientation="vertical"></LinearLayout>
 
             <TextView
+                android:id="@+id/textView_top5times_100steps"
                 style="@style/subtitle"
                 android:text="@string/steps100" />
 

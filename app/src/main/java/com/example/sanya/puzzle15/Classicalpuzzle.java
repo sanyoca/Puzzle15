@@ -25,6 +25,9 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
     int moves = 0;
     Chronometer timer;
     boolean isSound = true;
+    private int[] intImageResources_vic = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
+    private int[] intImageResources_sp = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
+
     private int[] intImageResources = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
 
     /**
@@ -87,13 +90,15 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
         SharedPreferences configuration = getApplication().getSharedPreferences("config", MODE_PRIVATE);
         String stringTheme = configuration.getString("theme", "Victorian");
         boolean isSound = configuration.getBoolean("sound", true);
-        Typeface themeFontStyle = null;
+        Typeface themeFontStyle;
         if (stringTheme.equals("Victorian")) {
             findViewById(R.id.frame).setBackgroundResource(R.drawable.vic_background_frame);
             themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/harrington.TTF");
+            intImageResources = intImageResources_vic;
         } else  {
             themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/SancreekRegular.ttf");
             findViewById(R.id.frame).setBackgroundResource(R.drawable.sp_background_frame);
+            intImageResources = intImageResources_sp;
         }
         RadioButton b30 = (RadioButton) findViewById(R.id.button30);
         b30.setTypeface(themeFontStyle);
@@ -163,7 +168,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
         }
         if (table.isGameWon()) {
             Toast.makeText(Classicalpuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
-            table.storeScore(table.NORMAL, moves, timer.getText().toString());
+            table.storeScore(Gameboard.NORMAL, moves, timer.getText().toString());
             timer.stop();
         }
     }
@@ -229,7 +234,8 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
                 showTable();
                 moves++;
                 TextView movesText = (TextView) findViewById(R.id.moves_textview);
-                movesText.setText(": " + String.valueOf(moves));
+                String ph = ": " + String.valueOf(moves);
+                movesText.setText(ph);
             }
 
             // not a tile was clicked, but a radiobutton or the flush button

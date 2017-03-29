@@ -85,7 +85,7 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
         SharedPreferences configuration = getApplication().getSharedPreferences("config", MODE_PRIVATE);
         String stringTheme = configuration.getString("theme", "Victorian");
         boolean isSound = configuration.getBoolean("sound", true);
-        Typeface themeFontStyle = null;
+        Typeface themeFontStyle;
         if (stringTheme.equals("Victorian")) {
             findViewById(R.id.frame).setBackgroundResource(R.drawable.vic_background_frame);
             themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/harrington.TTF");
@@ -165,7 +165,7 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
         }
         if (table.isGameWon()) {
             Toast.makeText(Holespuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
-            table.storeScore(table.HOLE, moves, timer.getText().toString());
+            table.storeScore(Gameboard.HOLE, moves, timer.getText().toString());
             timer.stop();
         }
     }
@@ -231,7 +231,8 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
                 showTable();
                 moves ++;
                 TextView movesText = (TextView) findViewById(R.id.moves_textview);
-                movesText.setText(": "+String.valueOf(moves));
+                String ph = ": " + String.valueOf(moves);
+                movesText.setText(ph);
             }
 
             // not a tile was clicked, but a radiobutton or the flush button

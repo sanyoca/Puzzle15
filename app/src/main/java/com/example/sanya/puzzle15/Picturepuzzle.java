@@ -20,7 +20,6 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import static android.view.View.GONE;
 
 public class Picturepuzzle extends AppCompatActivity implements View.OnClickListener {
@@ -115,7 +114,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         SharedPreferences configuration = getApplication().getSharedPreferences("config", MODE_PRIVATE);
         String stringTheme = configuration.getString("theme", "Victorian");
         boolean isSound = configuration.getBoolean("sound", true);
-        Typeface themeFontStyle = null;
+        Typeface themeFontStyle;
         if (stringTheme.equals("Victorian")) {
             findViewById(R.id.frame).setBackgroundResource(R.drawable.vic_background_frame);
             themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/harrington.TTF");
@@ -194,7 +193,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         }
         if (table.isGameWon()) {
             Toast.makeText(Picturepuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
-            table.storeScore(table.PICTURE, moves, timer.getText().toString());
+            table.storeScore(Gameboard.PICTURE, moves, timer.getText().toString());
             timer.stop();
         }
     }
@@ -260,7 +259,8 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
                 showTable();
                 moves ++;
                 TextView movesText = (TextView) findViewById(R.id.moves_textview);
-                movesText.setText(": "+String.valueOf(moves));
+                String ph = ": " + String.valueOf(moves);
+                movesText.setText(ph);
             }
 
             // not a tile was clicked, but a radiobutton or the flush button
