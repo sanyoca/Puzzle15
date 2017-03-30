@@ -14,13 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import static com.example.sanya.puzzle15.R.id.button_highscores;
-import static com.example.sanya.puzzle15.R.id.button_quitgame;
-import static com.example.sanya.puzzle15.R.id.button_rules;
-import static com.example.sanya.puzzle15.R.id.button_settings;
-import static com.example.sanya.puzzle15.R.id.button_startholes;
-import static com.example.sanya.puzzle15.R.id.button_startpicture;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     /**
      * Handles playback of all the sound files
@@ -85,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // import/set a font for the title
         Typeface themeFontStyle;
         int intMusic;
-        ImageView startBackgroundImage = (ImageView) findViewById(R.id.image_start_background);
-        LinearLayout linearSplashScreen = (LinearLayout) findViewById(R.id.splashscreen);
+        ImageView startBackgroundImage = (ImageView) findViewById(R.id.image_startbackground);
+        LinearLayout linearSplashScreen = (LinearLayout) findViewById(R.id.layout_splashscreen);
         if(stringTheme.equals("Victorian")) { // victorian style
             themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/harrington.TTF");
             intMusic = R.raw.theme_vic;
@@ -101,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView gameTitle = (TextView) findViewById(R.id.textview_gametitle);
         gameTitle.setTypeface(themeFontStyle);
         // and for the buttons - also set the onclicklistener
-        int[] buttons = {R.id.button_startclassical, R.id.button_startpicture, R.id.button_startholes, R.id.button_settings, R.id.button_highscores, R.id.button_rules, R.id.button_quitgame};
+        int[] buttons = {R.id.button_startclassical, R.id.button_startpicture, R.id.button_starthole, R.id.button_settings, R.id.button_highscores, R.id.button_rules, R.id.button_quitgame};
         TextView fontChangeButton;
         for(int i = 0; i<=6; i++)   {
             fontChangeButton = (TextView) findViewById(buttons[i]);
@@ -156,19 +149,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             // starts the picture solve game
-            case button_startpicture: {
+            case R.id.button_startpicture: {
                 intentStart = new Intent(MainActivity.this, Picturepuzzle.class);
                 startActivity(intentStart);
                 break;
             }
             // starts the hole version game
-            case button_startholes: {
+            case R.id.button_starthole: {
                 intentStart = new Intent(MainActivity.this, Holespuzzle.class);
                 startActivity(intentStart);
                 break;
             }
             // settings
-            case button_settings: {
+            case R.id.button_settings: {
                 releaseMediaPlayer();
                 intentStart = new Intent(MainActivity.this, Settings.class);
                 startActivity(intentStart);
@@ -176,21 +169,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             // shows the high scores
-            case button_highscores: {
+            case R.id.button_highscores: {
                 intentStart = new Intent(MainActivity.this, Highscores.class);
                 startActivity(intentStart);
                 break;
             }
 
             // displays the rules and history
-            case button_rules: {
+            case R.id.button_rules: {
                 intentStart = new Intent(MainActivity.this, Showrules.class);
                 startActivity(intentStart);
                 break;
             }
 
             // quits the game
-            case button_quitgame:  {
+            case R.id.button_quitgame:  {
                 this.finishAffinity();
 // TODO: these lines are for picking an image from the device image gallery
 /*

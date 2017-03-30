@@ -2,14 +2,24 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="double_margin">40dp</dimen>
-    <dimen name="half_margin">4dp</dimen>
+    <!-- the elevation of the splash screen and the highscore tables -->
+    <dimen name="elevation">8dp</dimen>
+    <!-- the margin above the game title in the splash screen -->
+    <dimen name="gametitle_topmargin">30dp</dimen>
+    <!-- the fonsize of the game title -->
     <dimen name="gametitle_fontsize">45sp</dimen>
+    <!-- padding fopr the buttons on the startscreen -->
+    <dimen name="buttonpadding">10dp</dimen>
+    <!-- a BIG margin after the last button on the start screen and above the save button in settings -->
+    <dimen name="double_margin">40dp</dimen>
+    <!-- the font size of the highscore tables top titles -->
     <dimen name="toptitle_fontsize">25sp</dimen>
+    <!-- top margin of the highscore tables subtitles -->
+    <dimen name="subtitle_margintop">10dp</dimen>
+    <!-- the fontsize of the highscore subtitle -->
     <dimen name="subtitle_fontsize">20sp</dimen>
-    <dimen name="start_padding_bottom">70dp</dimen>
-    <dimen name="start_elevation">8dp</dimen>
+    <!-- a little padding for the shuffle button -->
     <dimen name="shufflebutton_padding">30dp</dimen>
+    <!-- padding for the scoretable -->
     <dimen name="scoretable_padding">60dp</dimen>
-    <dimen name="gameboard_top_padding">26dp</dimen>
 </resources>

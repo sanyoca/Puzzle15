@@ -4,5 +4,5 @@
     <item
         android:drawable="@drawable/whiterectangle" />
     <item
-        android:drawable="@drawable/victorian_style_frame" />
+        android:drawable="@drawable/vic_frame" />
 </layer-list>

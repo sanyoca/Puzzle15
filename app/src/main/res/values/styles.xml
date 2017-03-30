@@ -15,51 +15,78 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@android:color/black</item>
     </style>
-
+<!-- styles for the splashscreen -->
+    <!-- the background -->
     <style name="startbackground">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:scaleType">centerCrop</item>
     </style>
 
-    <style name="gametitle">
+    <!-- the selection screen -->
+    <style name="splashscreen">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/double_margin</item>
-        <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:elevation">@dimen/elevation</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
+    <!-- the gametitle textview -->
+    <style name="gametitle">
+        <item name="android:layout_marginTop">@dimen/gametitle_topmargin</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">@dimen/gametitle_fontsize</item>
     </style>
 
+    <!-- the menu buttons -->
+    <style name="gamebuttons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:padding">@dimen/buttonpadding</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+    </style>
+<!-- Highscore tables -->
+    <!-- highscore tables -->
+    <style name="highscoretables">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/scoretable_padding</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
+        <item name="android:background">@drawable/vic_background_frame</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:elevation">@dimen/elevation</item>
+    </style>
+
+    <!-- the titles of the highscore tables -->
     <style name="toptitle" parent="gametitle">
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textSize">@dimen/toptitle_fontsize</item>
     </style>
 
+    <!-- the subtitles of the highscore tables -->
     <style name="subtitle" parent="gametitle">
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginTop">@dimen/subtitle_margintop</item>
         <item name="android:textSize">@dimen/subtitle_fontsize</item>
     </style>
-
-    <style name="gamebuttons">
-        <item name="android:layout_marginTop">@dimen/half_margin</item>
-        <item name="android:layout_marginBottom">@dimen/half_margin</item>
-        <!--<item name="android:background">@color/dirtywhite</item>-->
+<!-- the gameboard -->
+    <!-- style of the playboard -->
+    <style name="playboardstyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerInParent">true</item>
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:paddingBottom">10dp</item>
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
-        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:background">@drawable/vic_background_frame</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
+    <!-- style for the 4 linear layouts -->
     <style name="rowlayouts">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -67,27 +94,7 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="ll_shufflebutton">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="wrapped">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@android:color/black</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
-    </style>
-
-    <style name="shufflebutton" parent="wrapped">
-        <item name="android:paddingLeft">@dimen/shufflebutton_padding</item>
-        <item name="android:paddingRight">@dimen/shufflebutton_padding</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
-    </style>
-
+    <!-- style for the linear layout containing the radiobuttons and the shuffle button -->
     <style name="radionshuffle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -96,6 +103,39 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
+    <!-- simple wrapping layout -->
+    <style name="wrapped">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+    </style>
+
+    <!-- the style for the linear layout containing the shuffle button -->
+    <style name="ll_shufflebutton">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- style  for the shuffle button -->
+    <style name="shufflebutton" parent="wrapped">
+        <item name="android:paddingLeft">@dimen/shufflebutton_padding</item>
+        <item name="android:paddingRight">@dimen/shufflebutton_padding</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+    </style>
+
+    <!-- style for the layout containing the moves and the timer -->
+    <style name="movesandtime">
+        <item name="android:visibility">gone</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- style for the moves and the timer -->
     <style name="movesandtimetext">
         <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
         <item name="android:layout_width">match_parent</item>
@@ -104,31 +144,11 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="movesandtime">
-        <item name="android:visibility">gone</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="highscoretables">
+    <!-- style for the settings layout -->
+    <style name="settingsstyle">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:padding">@dimen/scoretable_padding</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
-        <item name="android:background">@drawable/vic_background_frame</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:elevation">@dimen/start_elevation</item>
-    </style>
-
-    <style name="playboardstyle">
-        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:background">@drawable/vic_background_frame</item>
-        <item name="android:padding">@dimen/gameboard_top_padding</item>
-        <item name="android:orientation">vertical</item>
+        <item name="android:orientation">horizontal</item>
     </style>
-
 </resources>

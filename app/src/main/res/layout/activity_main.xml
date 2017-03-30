@@ -9,72 +9,57 @@
     <ImageView
         style="@style/startbackground"
         android:contentDescription="@string/background"
-        android:id="@+id/image_start_background"
+        android:id="@+id/image_startbackground"
         android:src="@drawable/bg_sp" />
 
     <LinearLayout
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/splashscreen"
-        android:background="@drawable/sp_background_frame"
-        android:paddingBottom="@dimen/start_padding_bottom"
-        android:elevation="@dimen/start_elevation"
-        android:orientation="vertical">
+        style="@style/splashscreen"
+        android:id="@+id/layout_splashscreen"
+        android:background="@drawable/sp_background_frame">
 
-        <RelativeLayout
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:id="@+id/textview_gametitle"
-                style="@style/gametitle"
-                android:text="@string/puzzle15" />
-
-        </RelativeLayout>
+            android:id="@+id/textview_gametitle"
+            style="@style/gametitle"
+            android:text="@string/puzzle15"/>
 
         <TextView
+            style="@style/gamebuttons"
             android:id="@+id/button_startclassical"
-            style="@style/gamebuttons"
-            android:text="@string/classical" />
+            android:text="@string/classical"/>
 
         <TextView
+            style="@style/gamebuttons"
             android:id="@+id/button_startpicture"
-            style="@style/gamebuttons"
-            android:text="@string/solveapicture" />
+            android:text="@string/solveapicture"/>
 
         <TextView
-            android:id="@+id/button_startholes"
             style="@style/gamebuttons"
-            android:text="@string/classicalwithholes" />
+            android:id="@+id/button_starthole"
+            android:text="@string/classicalwithholes"/>
 
         <TextView
             android:id="@+id/button_highscores"
             style="@style/gamebuttons"
-            android:text="@string/highscores" />
+            android:text="@string/highscores"/>
 
         <TextView
-            android:id="@+id/button_settings"
             style="@style/gamebuttons"
-            android:text="@string/settings" />
+            android:id="@+id/button_settings"
+            android:text="@string/settings"/>
 
         <TextView
             android:id="@+id/button_rules"
             style="@style/gamebuttons"
-            android:text="@string/about" />
+            android:text="@string/about"/>
 
         <TextView
             android:id="@+id/button_quitgame"
+            android:layout_marginBottom="@dimen/double_margin"
             style="@style/gamebuttons"
-            android:text="@string/quitgame" />
+            android:text="@string/quitgame"/>
 
     </LinearLayout>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imagehere"/>
-
 
 </RelativeLayout>

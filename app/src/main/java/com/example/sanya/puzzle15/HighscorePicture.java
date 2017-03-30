@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.sanya.puzzle15.R.id.layout_top5times;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,11 +43,15 @@ public class HighscorePicture extends Fragment {
         String stringTheme = configuration.getString("theme", "Victorian");
         Typeface themeFontStyle;
         if (stringTheme.equals("Victorian")) {
-            rootView.findViewById(R.id.highscore_scroll).setBackgroundResource(R.drawable.bg_vic);
+            rootView.findViewById(R.id.scroll_highscore).setBackgroundResource(R.drawable.bg_vic);
             themeFontStyle = Typeface.createFromAsset(getActivity().getAssets(), "fonts/harrington.TTF");
+            rootView.findViewById(R.id.layout_top5moves).setBackgroundResource(R.drawable.vic_background_frame);
+            rootView.findViewById(layout_top5times).setBackgroundResource(R.drawable.vic_background_frame);
         } else  {
-            rootView.findViewById(R.id.highscore_scroll).setBackgroundResource(R.drawable.bg_sp);
+            rootView.findViewById(R.id.scroll_highscore).setBackgroundResource(R.drawable.bg_sp);
             themeFontStyle = Typeface.createFromAsset(getActivity().getAssets(), "fonts/SancreekRegular.ttf");
+            rootView.findViewById(R.id.layout_top5moves).setBackgroundResource(R.drawable.sp_background_frame);
+            rootView.findViewById(layout_top5times).setBackgroundResource(R.drawable.sp_background_frame);
         }
 
         final int[] intTilesResources = {R.id.titletop5moves, R.id.textView_top5moves_30steps, R.id.textView_top5moves_50steps, R.id.textView_top5moves_100steps, R.id.titletop5times, R.id.textView_top5times_30steps, R.id.textView_top5times_50steps, R.id.textView_top5times_100steps};
