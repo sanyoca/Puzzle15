@@ -29,16 +29,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TableLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TableRow>
-                        <TextView
-                            android:text="1"/>
-                        <TextView
-                            android:text="32"/>
-                    </TableRow>
-                </TableLayout>
             </LinearLayout>
 
             <TextView
