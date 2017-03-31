@@ -51,6 +51,7 @@
             <LinearLayout
                 android:id="@+id/top5moves100layout"
                 android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/gametitle_topmargin"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"></LinearLayout>
         </LinearLayout>
@@ -94,6 +95,7 @@
 
             <LinearLayout
                 android:id="@+id/top5times100layout"
+                android:layout_marginBottom="@dimen/gametitle_topmargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"></LinearLayout>
