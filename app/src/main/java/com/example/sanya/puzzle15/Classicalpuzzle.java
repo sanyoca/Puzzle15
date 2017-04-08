@@ -26,7 +26,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
     Chronometer timer;
     boolean isSound = true;
     private int[] intImageResources_vic = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
-    private int[] intImageResources_sp = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
+    private int[] intImageResources_sp = {0, R.drawable.sp_tile_1, R.drawable.sp_tile_2, R.drawable.sp_tile_3, R.drawable.sp_tile_4, R.drawable.sp_tile_5, R.drawable.sp_tile_6, R.drawable.sp_tile_7, R.drawable.sp_tile_8, R.drawable.sp_tile_9, R.drawable.sp_tile_10, R.drawable.sp_tile_11, R.drawable.sp_tile_12, R.drawable.sp_tile_13, R.drawable.sp_tile_14, R.drawable.sp_tile_15, R.drawable.sp_tile_1};
     private int[] intImageResources = {0, R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4, R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8, R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12, R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_1};
 
     /**
