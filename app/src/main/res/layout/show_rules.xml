@@ -1,13 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/activity_horizontal_margin"
     android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
 
     <WebView
         android:id="@+id/rules_webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+
+    <TextView
+        style="@style/creditstitle"
+        android:text="@string/usedartsandcredits" />
+
+    <TextView
+        style="@style/creditstitle"
+        android:text="@string/usedmusic" />
+
+    <TextView
+        android:id="@+id/music_credits"
+        style="@style/credits"
+        android:drawableLeft="@drawable/ic_library_music_black_24dp"
+        android:text="Gothic Waltz Music - Enchanted Ballroom \nand Steampunk Music - Gears and Cogs \nby Derek &amp; Brandon Fiechter" />
+
+    <TextView
+        style="@style/creditstitle"
+        android:text="@string/usedimages" />
+
+    <TextView
+        android:id="@+id/horse_credits"
+        style="@style/credits"
+        android:drawableLeft="@drawable/ic_color_lens_black_24dp"
+        android:text="Horse image\nhttps://images-na.ssl-images-amazon.com/images/I/91yPXjGrH7L._SL1500_.jpg" />
+
+    <TextView
+        android:id="@+id/thor_credits"
+        style="@style/credits"
+        android:drawableLeft="@drawable/ic_color_lens_black_24dp"
+        android:text="Thor image\nhttp://marvel-movies.wikia.com/wiki/File:Thor_111.jpg" />
+
+    <TextView
+        android:id="@+id/vic_bg_credits"
+        style="@style/credits"
+        android:drawableLeft="@drawable/ic_color_lens_black_24dp"
+        android:text="Victorian background\nhttp://wallpaper-gallery.net/single/victorian-wallpapers/victorian-wallpapers-14.html" />
+
+    <TextView
+        android:id="@+id/sp_bg_credits"
+        style="@style/credits"
+        android:drawableLeft="@drawable/ic_color_lens_black_24dp"
+        android:text="Steampunk background\nhttp://image.hotdog.hu/user/bilberry/magazin/steampunk_hatterek08_1280x800.jpg" />
+
+    <TextView
+        android:id="@+id/sp_frame_credits"
+        style="@style/credits"
+        android:drawableLeft="@drawable/ic_color_lens_black_24dp"
+        android:text="Steampunk frame\nhttp://dswilliams.com/2016/08/30/steampunk-transparent-png-picture-frame/" />
+
+    <TextView
+        android:id="@+id/vic_frame_credits"
+        style="@style/credits"
+        android:drawableLeft="@drawable/ic_color_lens_black_24dp"
+        android:text="Victorian frame\nhttps://openclipart.org/detail/240423/victorian-frame" />
+
+    <TextView
+        style="@style/creditstitle"
+        android:text="@string/usedfonts" />
+
+    <TextView
+        android:id="@+id/vic_font_credit"
+        style="@style/credits"
+        android:drawableLeft="@drawable/ic_font_download_black_24dp"
+        android:text="Victorian fonts set\nhttp://www.1001freefonts.com/harrington.font" />
+
+    <TextView
+        android:id="@+id/sp_font_credit"
+        style="@style/credits"
+        android:drawableLeft="@drawable/ic_font_download_black_24dp"
+        android:text="Steampunk font set\nhttp://www.1001freefonts.com/sancreek.font" />
 
 </LinearLayout>
+</ScrollView>

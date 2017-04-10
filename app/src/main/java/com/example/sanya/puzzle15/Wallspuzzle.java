@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 /**
  * Created by sanya on 2017.03.13..
+ * It's totally not working, but left in, for a later possibility. or when I get smarter :P
  */
 
 public class Wallspuzzle extends AppCompatActivity implements OnClickListener {

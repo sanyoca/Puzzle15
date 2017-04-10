@@ -1,13 +1,17 @@
 package com.example.sanya.puzzle15;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +24,10 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
+
+import static android.graphics.Bitmap.createBitmap;
 import static android.view.View.GONE;
 
 public class Picturepuzzle extends AppCompatActivity implements View.OnClickListener {
@@ -28,6 +36,10 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
     Chronometer timer;
     private int whichImage = 0;
     private int[][] intImageResources = {{0, R.drawable.horse_1, R.drawable.horse_2, R.drawable.horse_3, R.drawable.horse_4, R.drawable.horse_5, R.drawable.horse_6, R.drawable.horse_7, R.drawable.horse_8, R.drawable.horse_9, R.drawable.horse_10, R.drawable.horse_11, R.drawable.horse_12, R.drawable.horse_13, R.drawable.horse_14, R.drawable.horse_15, R.drawable.horse_16},{0, R.drawable.thor_1, R.drawable.thor_2, R.drawable.thor_3, R.drawable.thor_4, R.drawable.thor_5, R.drawable.thor_6, R.drawable.thor_7, R.drawable.thor_8, R.drawable.thor_9, R.drawable.thor_10, R.drawable.thor_11, R.drawable.thor_12, R.drawable.thor_13, R.drawable.thor_14, R.drawable.thor_15, R.drawable.thor_16}};
+
+    Bitmap imageToUse;
+    Bitmap[] imageSlices;
+    boolean isImageSet = false;
 
     /**
      * Handles playback of all the sound files
@@ -82,20 +94,30 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playboard);
+
+        // setup the spinner to choose between the 2 built-in image and the ones from the gallery
         Spinner pictureChooser = (Spinner)findViewById(R.id.spinner1);
-        String[] items = new String[]{"Horse", "Thor"};
+        String[] items = new String[]{"Horse", "Thor", "Select image"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         pictureChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                  switch (position) {
+                     // horse was chosen
                      case 0:
                          whichImage = 0;
+                         isImageSet = false;
                          showTable();
                          break;
+                     // thor was chosen
                      case 1:
                          whichImage = 1;
+                         isImageSet = false;
                          showTable();
+                         break;
+                     // an image from the gallery was chosen
+                     case 2:
+                         selectImage();
                          break;
                  }
              }
@@ -110,7 +132,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
 
         // still no lolligaggin with the orientation !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+        // read the theme from the config and apply it
         SharedPreferences configuration = getApplication().getSharedPreferences("config", MODE_PRIVATE);
         String stringTheme = configuration.getString("theme", "Victorian");
         boolean isSound = configuration.getBoolean("sound", true);
@@ -122,6 +144,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
             themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/SancreekRegular.ttf");
             findViewById(R.id.frame).setBackgroundResource(R.drawable.sp_background_frame);
         }
+        // set the onclicklisteners
         RadioButton b30 = (RadioButton) findViewById(R.id.button30);
         b30.setTypeface(themeFontStyle);
         b30.setOnClickListener(this);
@@ -162,7 +185,6 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         for (row = 1; row <= 4; row++) {
             for (col = 1; col <= 4; col++) {
 
-
                 ImageView newTile = new ImageView(Picturepuzzle.this);
                 switch (row) {
                     case 1:
@@ -182,7 +204,12 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
                 }
                 String e = String.valueOf(table.getBoardValue(col, row));
                 newTile.setPadding(pxToDp(2),pxToDp(2), pxToDp(2), pxToDp(2));
-                newTile.setImageResource(intImageResources[whichImage][Integer.valueOf(e)]);
+
+                if(!isImageSet) { // built-in image is used
+                    newTile.setImageResource(intImageResources[whichImage][Integer.valueOf(e)]);
+                }   else    {// if not a built-in image was selected
+                    newTile.setImageBitmap(imageSlices[Integer.valueOf(e)]);
+                }
                 LinearLayout ll = new LinearLayout(this);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(pxToDp(70), pxToDp(70));
                 newTile.setLayoutParams(layoutParams);
@@ -191,6 +218,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
                 rowLayout.addView(newTile);
             }
         }
+        // the user won
         if (table.isGameWon()) {
             Toast.makeText(Picturepuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
             table.storeScore(Gameboard.PICTURE, moves, timer.getText().toString());
@@ -338,5 +366,51 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         float scale = getResources().getDisplayMetrics().density;
         return (int) ((px*scale)+0.5f);
     }
+    // selects an image from the gallery
+    public void selectImage()   {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
+    }
 
+    // after returning to this activity (presumably from the image choosing), this executes
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)  {
+        // Check which request we're responding to (we sent startActivityForResult(intent, <<1>>))
+        if (requestCode == 1) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                Uri selectedImage = data.getData();
+                try {
+                    // get the image
+                    imageToUse = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                    // slice it
+                    sliceImage();
+                }   catch (IOException e)  {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void sliceImage()   {
+        //get the width and height of the slices, by dividing the width|height of the original image by 4
+        int intHeightStep = imageToUse.getHeight() / 4;
+        int intWidthStep = imageToUse.getWidth() / 4;
+        // the slices will take 16 spots in the array
+        imageSlices = new Bitmap[17];
+        int counter = 1;
+
+        for(int row=1; row<=4; row++)   {
+            for(int col=1; col<=4; col++)   {
+                // SLICE IT!
+                imageSlices[counter] = createBitmap(imageToUse, (col-1)*intWidthStep, (row-1)*intHeightStep, intWidthStep, intHeightStep);
+                counter ++;
+            }
+        }
+        // we play with an image from the gallery, not a built-in one
+        isImageSet = true;
+        showTable();
+    }
 }

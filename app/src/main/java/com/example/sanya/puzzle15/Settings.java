@@ -32,7 +32,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
         setContentView(R.layout.settings);
         // no lolligaggin with the screen !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+        // read the curtrent settings (theme, sound, music)
         SharedPreferences configuration = this.getSharedPreferences("config", MODE_PRIVATE);
         theme = configuration.getString("theme", "Victorian");
         isMusic = configuration.getBoolean("music", true);
@@ -51,6 +51,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
         SwitchCompat switchSound = (SwitchCompat) findViewById(R.id.sound_onoff);
         switchSound.setChecked(isSound);
 
+        // set the spinner to choose between styles
         Spinner themeChooser = (Spinner)findViewById(R.id.themespinner);
 
         String[] items = new String[]{getString(R.string.victorian), getString(R.string.steampunk)};
@@ -74,7 +75,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
             }
         });
         themeChooser.setAdapter(adapter);
-
+        // set the fonts to the current theme's font
         if(theme.equals("Victorian"))   {
             themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/harrington.TTF");
             layoutSettings.setBackgroundResource(R.drawable.bg_vic);
@@ -97,6 +98,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
 
     }
 
+    // switch between the music/sound on/off state
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch(buttonView.getId())  {
@@ -111,6 +113,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
         }
     }
 
+    // save the config in case of clicking on "save" and tell it to the user by prompting a toast
     @Override
     public void onClick(View v) {
         SharedPreferences configuration = this.getSharedPreferences("config", MODE_PRIVATE);

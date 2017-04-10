@@ -39,6 +39,7 @@ public class HighscoreHole extends Fragment {
         String[] bestTimes = {"", "", "", "", "", ""};
         TextView insertThisMoves, insertThisTimes;
 
+        // read the config to determine the theme and set it
         SharedPreferences configuration = getActivity().getSharedPreferences("config", MODE_PRIVATE);
         String stringTheme = configuration.getString("theme", "Victorian");
         Typeface themeFontStyle;
@@ -55,13 +56,14 @@ public class HighscoreHole extends Fragment {
         }
 
         final int[] intTilesResources = {R.id.titletop5moves, R.id.textView_top5moves_30steps, R.id.textView_top5moves_50steps, R.id.textView_top5moves_100steps, R.id.titletop5times, R.id.textView_top5times_30steps, R.id.textView_top5times_50steps, R.id.textView_top5times_100steps};
-
+        // set the font
         TextView tv;
         for(int i=0; i<=7; i++) {
             tv = (TextView) rootView.findViewById(intTilesResources[i]);
             tv.setTypeface(themeFontStyle);
         }
 
+        // display the highscores/best times
         for(int i=0; i<=2; i++) {
             SharedPreferences highscoreSaves = getActivity().getSharedPreferences(prefFiles[i], MODE_PRIVATE);
             for(int j=0; j<=4; j++) {

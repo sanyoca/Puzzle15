@@ -85,10 +85,11 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
         // no lolligaggin with the screen !!!
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        // Create and setup the {@link AudioManager} to request audio focus
+        // read the theme  and sound settings from the 'config'
         SharedPreferences configuration = getApplication().getSharedPreferences("config", MODE_PRIVATE);
         String stringTheme = configuration.getString("theme", "Victorian");
         boolean isSound = configuration.getBoolean("sound", true);
+        // apply the background, fontset and tileset, what theme is set in config
         Typeface themeFontStyle;
         if (stringTheme.equals("Victorian")) {
             findViewById(R.id.frame).setBackgroundResource(R.drawable.vic_background_frame);
@@ -99,6 +100,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
             findViewById(R.id.frame).setBackgroundResource(R.drawable.sp_background_frame);
             intImageResources = intImageResources_sp;
         }
+        // set the shuffle and radio buttons onclicklistener
         RadioButton b30 = (RadioButton) findViewById(R.id.button30);
         b30.setTypeface(themeFontStyle);
         b30.setOnClickListener(this);
@@ -113,9 +115,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
         shuffle.setTypeface(themeFontStyle);
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
         table = new Gameboard(this, Gameboard.NORMAL);
-
         showTable();
     }
 
@@ -154,6 +154,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
                     default:
                         rowLayout = (LinearLayout) findViewById(R.id.row4);
                 }
+                // put a tile, to the col, row position
                 String e = String.valueOf(table.getBoardValue(col, row));
                 newTile.setPadding(pxToDp(0), pxToDp(2), pxToDp(2), pxToDp(2));
                 newTile.setImageResource(intImageResources[Integer.valueOf(e)]);
@@ -165,6 +166,7 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
                 rowLayout.addView(newTile);
             }
         }
+        // if the player won
         if (table.isGameWon()) {
             Toast.makeText(Classicalpuzzle.this, R.string.youwon, Toast.LENGTH_LONG).show();
             table.storeScore(Gameboard.NORMAL, moves, timer.getText().toString());
@@ -313,5 +315,4 @@ public class Classicalpuzzle extends AppCompatActivity implements View.OnClickLi
         float scale = getResources().getDisplayMetrics().density;
         return (int) ((px * scale) + 0.5f);
     }
-
 }

@@ -185,32 +185,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // quits the game
             case R.id.button_quitgame:  {
                 this.finishAffinity();
-// TODO: these lines are for picking an image from the device image gallery
-/*
-                Intent intent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 0);
-*/
-// TODO: and these lines are for reading and inserting the selected image
-/*
-  @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-    super.onActivityResult(requestCode, resultCode, data);
-
-    if (resultCode == RESULT_OK){
-     Uri targetUri = data.getData();
-     textTargetUri.setText(targetUri.toString());
-     Bitmap bitmap;
-     try {
-      bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-      targetImage.setImageBitmap(bitmap);
-     } catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-     }
-    }
-*/
             }
             default: {
                 break;
