@@ -395,9 +395,10 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
     }
 
     public void sliceImage()   {
-        //get the width and height of the slices, by dividing the width|height of the original image by 4
+        //get the width and height of the slices, by dividing the width|height of the original image by 4 and selecting the lesser value to maintain ratio
         int intHeightStep = imageToUse.getHeight() / 4;
         int intWidthStep = imageToUse.getWidth() / 4;
+        int intSliceSize = intHeightStep>intWidthStep ? intWidthStep : intHeightStep;
         // the slices will take 16 spots in the array
         imageSlices = new Bitmap[17];
         int counter = 1;
@@ -405,7 +406,7 @@ public class Picturepuzzle extends AppCompatActivity implements View.OnClickList
         for(int row=1; row<=4; row++)   {
             for(int col=1; col<=4; col++)   {
                 // SLICE IT!
-                imageSlices[counter] = createBitmap(imageToUse, (col-1)*intWidthStep, (row-1)*intHeightStep, intWidthStep, intHeightStep);
+                imageSlices[counter] = createBitmap(imageToUse, (col-1)*intSliceSize, (row-1)*intSliceSize, intSliceSize, intSliceSize);
                 counter ++;
             }
         }
