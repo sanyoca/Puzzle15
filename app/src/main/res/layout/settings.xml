@@ -1,76 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_settings"
-    android:background="@drawable/bg_vic"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:id="@+id/image_settingsbg"
+        android:src="@drawable/bg_sp" />
 
     <LinearLayout
+        android:id="@+id/settingsscreen"
         android:layout_width="wrap_content"
-        android:background="@drawable/vic_background_frame"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/vic_background_frame"
         android:elevation="@dimen/elevation"
-        android:orientation="vertical"
-        android:id="@+id/settingsscreen"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_marginLeft="@dimen/double_margin"
-        android:layout_marginTop="@dimen/scoretable_padding"
-        style="@style/settingsstyle">
+        <LinearLayout
+            style="@style/settingsstyle"
+            android:layout_marginLeft="@dimen/double_margin"
+            android:layout_marginTop="@dimen/scoretable_padding">
 
-        <TextView
-            android:id="@+id/text_theme"
+            <TextView
+                android:id="@+id/text_theme"
+                style="@style/wrapped"
+                android:text="@string/theme" />
+
+            <Spinner
+                android:id="@+id/themespinner"
+                style="@style/wrapped"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/settingsstyle">
+
+            <TextView
+                android:id="@+id/text_music"
+                style="@style/wrapped"
+                android:text="@string/music" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/music_onoff"
+                style="@style/wrapped"
+                android:checked="true" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/settingsstyle">
+
+            <TextView
+                android:id="@+id/text_sound"
+                style="@style/wrapped"
+                android:text="@string/sound" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/sound_onoff"
+                style="@style/wrapped"
+                android:checked="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/savebutton"
             style="@style/wrapped"
-            android:text="@string/theme" />
-
-        <Spinner
-            android:id="@+id/themespinner"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            style="@style/wrapped"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginLeft="@dimen/double_margin"
-        style="@style/settingsstyle">
-
-        <TextView
-            style="@style/wrapped"
-            android:id="@+id/text_music"
-            android:text="@string/music"/>
-
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/music_onoff"
-            style="@style/wrapped"
-            android:checked="true"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginLeft="@dimen/double_margin"
-        style="@style/settingsstyle">
-
-        <TextView
-            style="@style/wrapped"
-            android:id="@+id/text_sound"
-            android:text="@string/sound"/>
-
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/sound_onoff"
-            style="@style/wrapped"
-            android:checked="true"/>
-    </LinearLayout>
-
-    <Button
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/double_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        style="@style/wrapped"
-        android:id="@+id/savebutton"
-        android:text="@string/saveconfig"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/save_bottommargin"
+            android:layout_marginTop="@dimen/double_margin"
+            android:text="@string/saveconfig" />
 
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

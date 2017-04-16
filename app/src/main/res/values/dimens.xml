@@ -22,4 +22,12 @@
     <dimen name="shufflebutton_padding">30dp</dimen>
     <!-- padding for the scoretable -->
     <dimen name="scoretable_padding">60dp</dimen>
+    <!-- setting style margin right -->
+    <dimen name="settings_marginright">20dp</dimen>
+    <!-- about/rules - the drawable's padding -->
+    <dimen name="abouticon_padding">8dp</dimen>
+    <!-- setiings save button bottom margin -->
+    <dimen name="save_bottommargin">30dp</dimen>
+    <!-- playboard row margins -->
+    <dimen name="rowmargin">20dp</dimen>
 </resources>

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,8 +42,10 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
         TextView textTheme = (TextView) findViewById(R.id.text_theme);
         TextView textMusic = (TextView) findViewById(R.id.text_music);
         TextView textSound = (TextView) findViewById(R.id.text_sound);
+
         Button saveButton = (Button) findViewById(R.id.savebutton);
-        LinearLayout layoutSettings = (LinearLayout) findViewById(R.id.layout_settings);
+        ImageView imageBackground = (ImageView) findViewById(R.id.image_settingsbg);
+
         LinearLayout layoutSettingsScreen = (LinearLayout) findViewById(R.id.settingsscreen);
         Typeface themeFontStyle;
 
@@ -78,12 +81,12 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
         // set the fonts to the current theme's font
         if(theme.equals("Victorian"))   {
             themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/harrington.TTF");
-            layoutSettings.setBackgroundResource(R.drawable.bg_vic);
+            imageBackground.setImageResource(R.drawable.bg_vic);
             layoutSettingsScreen.setBackgroundResource(R.drawable.vic_background_frame);
             themeChooser.setSelection(0);
         }   else    {
             themeFontStyle = Typeface.createFromAsset(getAssets(), "fonts/SancreekRegular.ttf");
-            layoutSettings.setBackgroundResource(R.drawable.bg_sp);
+            imageBackground.setImageResource(R.drawable.bg_sp);
             layoutSettingsScreen.setBackgroundResource(R.drawable.sp_background_frame);
             themeChooser.setSelection(1);
         }

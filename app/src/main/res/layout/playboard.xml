@@ -18,6 +18,9 @@
         android:background="@drawable/vic_background_frame">
 
         <LinearLayout
+            android:layout_marginTop="@dimen/rowmargin"
+            android:layout_marginLeft="@dimen/rowmargin"
+            android:layout_marginRight="@dimen/rowmargin"
             android:id="@+id/row1"
             style="@style/rowlayouts"></LinearLayout>
 
@@ -31,6 +34,7 @@
 
         <LinearLayout
             android:id="@+id/row4"
+            android:layout_marginBottom="@dimen/rowmargin"
             style="@style/rowlayouts"></LinearLayout>
     </LinearLayout>
 
