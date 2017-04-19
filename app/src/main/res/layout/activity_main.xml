@@ -15,7 +15,7 @@
     <LinearLayout
         style="@style/splashscreen"
         android:id="@+id/layout_splashscreen"
-        android:background="@drawable/sp_background_frame">
+        android:background="@drawable/vic_background_frame">
 
         <TextView
             android:layout_width="wrap_content"

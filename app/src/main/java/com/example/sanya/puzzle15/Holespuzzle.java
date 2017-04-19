@@ -111,6 +111,9 @@ public class Holespuzzle extends AppCompatActivity implements View.OnClickListen
         Button shuffle = (Button) findViewById(R.id.shufflebutton);
         shuffle.setOnClickListener(this);
         shuffle.setTypeface(themeFontStyle);
+        ((TextView)findViewById(R.id.moves)).setTypeface(themeFontStyle);
+        ((TextView)findViewById(R.id.moves_textview)).setTypeface(themeFontStyle);
+        ((TextView)findViewById(R.id.timer)).setTypeface(themeFontStyle);
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
